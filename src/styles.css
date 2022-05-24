@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+:root {
+
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+    min-width: 100vw;
+}
+
+.mainWrapper {
+
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(150px, 15%) 1fr;
+    grid-template-rows: 5% 1fr;
+}
+
+.nav {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav div {
+    width: 50%;
+    text-align: center;
+}
+
+.sidebar {
+    border: 1px solid black; 
+}
+
+.mainGroup {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+
+.mainGroup li {
+    list-style-type: none;
+}
+
+.showFormBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#newTaskForm {
+    width: 250px;
+    height: 250px;
+    position: fixed;
+    margin: 0 auto;
+    left: calc(50% - 125px);
+    top: calc(50% - 125px);
+    border: 1px solid black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardSection {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.card {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;;
+}
+
+.card p {
+    padding: 5px;
+}
+
+.completeBtn, .editBtn, .delBtn {
+    position: relative;
+    top: -80px;
+    left: 85%;
+}
