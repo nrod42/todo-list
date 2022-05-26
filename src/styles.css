@@ -51,9 +51,7 @@ body {
     list-style-type: none;
 }
 
-
-
-.showFormBtn {
+.addTaskBtn {
     position: absolute;
     right: 0;
     top: 0;

@@ -11,11 +11,7 @@ const createSidebar = () => {
     addProjectBtn.textContent = 'New Project';
 
     const projectForm = createProjectForm();
-    addProjectBtn.addEventListener('click', () => {
-        projectForm.style.display = 'flex';
-        sidebar.appendChild(projectForm);
-    });
-
+    addProjectBtn.addEventListener('click', showProjectForm);
     projectForm.addEventListener('submit', createProjectGroup);
 
     const mainGroup = document.createElement('div');
@@ -23,34 +19,40 @@ const createSidebar = () => {
 
     const inbox = document.createElement('button');
     inbox.textContent = 'Inbox';
-    inbox.addEventListener('click', () => {
-        const mainWrapper = document.querySelector('.mainWrapper')
-        const completedTasksSection = document.querySelector('.completedTasksSection');
-        mainWrapper.appendChild(createTaskSection());
-        completedTasksSection.remove();
-    });
     
-    const today = document.createElement('li');
+    const today = document.createElement('button');
     today.textContent = 'Today';
 
-    const upcoming = document.createElement('li');
+    const upcoming = document.createElement('button');
     upcoming.textContent = 'Upcoming';
     
     const completed = document.createElement('button');
     completed.textContent = 'Completed';
-    completed.addEventListener('click', () => {
-        const mainWrapper = document.querySelector('.mainWrapper')
-        const taskSection = document.querySelector('.cardSection');
-        mainWrapper.appendChild(completedSection());
-        taskSection.remove();
-    });
-    
+
+
     sidebar.appendChild(addProjectBtn);
     sidebar.appendChild(mainGroup);
     mainGroup.appendChild(inbox);
     mainGroup.appendChild(today);
     mainGroup.appendChild(upcoming);
     mainGroup.appendChild(completed);
+
+    function showProjectForm () {
+        projectForm.style.display = 'flex';
+        sidebar.appendChild(projectForm);
+    }
+
+    function showInboxSection () {
+        const mainWrapper = document.querySelector('.mainWrapper');
+        const completedTasksSection = document.querySelector('.completedTasksSection');
+
+    }
+
+    function showCompletedSection () {
+        const mainWrapper = document.querySelector('.mainWrapper');
+        const cardSection = document.querySelector('.cardSection');
+
+    }
 
     return sidebar;
 };
@@ -62,7 +64,7 @@ const createProjectGroup = (e) => {
 
     const projectGroup = document.createElement('div');
     projectGroup.classList.add('projectGroup');
-    const projectName = document.createElement('ul');
+    const projectName = document.createElement('button');
     projectName.textContent = projectForm.projectName.value;
 
     projectGroup.appendChild(projectName);

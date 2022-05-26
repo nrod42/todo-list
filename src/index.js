@@ -4,6 +4,7 @@ import {createTaskSection} from './tasks.js';
 import './styles.css';
 
 const mainWrapper = document.querySelector('.mainWrapper');
+
 const nav = makeNav();
 const sidebar = createSidebar();
 const taskSection = createTaskSection();
@@ -14,12 +15,7 @@ mainWrapper.appendChild(sidebar);
 mainWrapper.appendChild(taskSection);
 
 
-//BRUH YOURE AN IDIOT
-//EACH MODULE JUST DOES SOMETHING LIKE A FUNCTION
-//ANY EVENT LISTENERS SHOULD BE HERE IN INDEX
-//WHICH MEANS THAT THE FUNCTIONS NEED TO BE INDEPENDENT OF ANYTHING ELSE
-//EX: IF A MODULE FUNCTION MAKES A DIV, IT SHOULDN'T HAVE TO RELY ON ANYTHING OUTSIDE OF IT!!!
-//EVENT LISTENERS, APPEND CHILD, CHANGING OF FORM ELEMENTS SHOULD BE DONE HERE IN INDEX
+
 
 
 //INBOX SHOULD SHOW EVERY ACTIVE TASK, WHETHER OR NOT ITS PART OF A GROUP OR PROJECT
@@ -29,3 +25,6 @@ mainWrapper.appendChild(taskSection);
 //COMPLETED BUTTON SAHOULD CHANGE THE TASK PROPERTY TO COMPLETED
 //EDIT SHOULD OPEN THE FORM BUT WITH THE TASK PROPERTIES PRE FILLED
 //DELETE SHOULD DELETE THE TASK FROM THE TASK ARRAY
+
+
+//Maybe we can add the card button event listners later so that they have access to the cards themselves

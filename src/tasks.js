@@ -21,6 +21,8 @@ const createTask  = (title, description, dueDate, priority) => {
     }
 };
 
+
+
 const createTaskCard = (task) => {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -64,10 +66,7 @@ const createTaskCard = (task) => {
     const delBtn = document.createElement('button');
     delBtn.classList.add('delBtn');
     delBtn.textContent = 'Delete';
-    delBtn.addEventListener('click', () => {
-        card.remove();
-    });
- 
+
     card.appendChild(taskTitle);
     card.appendChild(taskDescription);
     card.appendChild(taskDueDate);
@@ -79,6 +78,8 @@ const createTaskCard = (task) => {
 };
 
 const createTaskSection = () => {
+    const currentCardSection = [];
+    
     const cardSection = document.createElement('div');
     cardSection.classList.add('cardSection');
 
@@ -92,11 +93,28 @@ const createTaskSection = () => {
 
     cardSection.appendChild(form);
     cardSection.appendChild(addTaskBtn);
-    cardSection.appendChild(createTaskCard(createTask('First To-Do', 'This is my first task', '5/31/22', 'high')));
+    
+    const defaultTask = createTaskCard(createTask('First To-Do', 'This is my first task', '2022-05-23', 'high'));
+    currentCardSection.push(defaultTask);
+    cardSection.appendChild(defaultTask);
+    
 
-    function addToCardSection (e) {
+
+
+
+
+
+    function addToCardSection(e) {
         e.preventDefault();
-        cardSection.appendChild(createTaskCard(createTask(form.title.value, form.description.value, form.dueDate.value, form.priority.value)));
+        let newCard = createTaskCard(createTask(form.title.value, form.description.value, form.dueDate.value, form.priority.value));
+        currentCardSection.push(newCard);
+        currentCardSection.forEach(card => {
+            cardSection.appendChild(card)
+            // card.querySelector('.delBtn').addEventListener('click', () => {
+            //     currentCardSection.splice(currentCardSection.indexOf(card), 1)
+            // });
+        });
+        console.log(currentCardSection);
         clearTaskForm();
     };
 
@@ -111,7 +129,7 @@ const createTaskSection = () => {
         form.priority.value = 'none';
         form.style.display = 'none';
     };
-
+    
     return cardSection;
 };
 
