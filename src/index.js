@@ -1,43 +1,31 @@
-import nav from './nav.js';
-import makeSidebar from './sidebar.js';
-import makeForm from './taskForm.js';
-import {taskHandler, clearForm} from './taskHandler.js';
-import makeCard from './makeCard.js';
-import Task from './makeTask.js';
+import makeNav from './makeNav.js';
+import {createSidebar} from './sidebar.js';
+import {createTaskSection} from './tasks.js';
 import './styles.css';
 
 const mainWrapper = document.querySelector('.mainWrapper');
-const form = makeForm();
-const sidebar = makeSidebar();
+const nav = makeNav();
+const sidebar = createSidebar();
+const taskSection = createTaskSection();
 
-const showFormBtn = document.createElement('button');
-showFormBtn.classList.add('showFormBtn');
-showFormBtn.textContent = 'Add Task';
-showFormBtn.addEventListener('click', showForm);
-
-function showForm() {
-    form.style.display = 'flex'
-}
-
-
-const taskSection = taskHandler();
-
-//issue: when this was in the module, the module was ONLY returning cardSection so this event listener was never really added. We need to add it back to module somehow. Maybe, returning the new form and deleteing the old one?
-form.addEventListener('submit', addToCardSection);
-    
-const allCards = [];
-
-function addToCardSection (e) {
-    e.preventDefault();
-    allCards.push(makeCard(new Task(form.title.value, form.description.value, form.dueDate.value, 'No')));
-    allCards.forEach(card => {
-        taskSection.appendChild(card);
-    })
-    clearForm();
-}
 
 mainWrapper.appendChild(nav);
 mainWrapper.appendChild(sidebar);
-mainWrapper.appendChild(form);
 mainWrapper.appendChild(taskSection);
-taskSection.appendChild(showFormBtn);
+
+
+//BRUH YOURE AN IDIOT
+//EACH MODULE JUST DOES SOMETHING LIKE A FUNCTION
+//ANY EVENT LISTENERS SHOULD BE HERE IN INDEX
+//WHICH MEANS THAT THE FUNCTIONS NEED TO BE INDEPENDENT OF ANYTHING ELSE
+//EX: IF A MODULE FUNCTION MAKES A DIV, IT SHOULDN'T HAVE TO RELY ON ANYTHING OUTSIDE OF IT!!!
+//EVENT LISTENERS, APPEND CHILD, CHANGING OF FORM ELEMENTS SHOULD BE DONE HERE IN INDEX
+
+
+//INBOX SHOULD SHOW EVERY ACTIVE TASK, WHETHER OR NOT ITS PART OF A GROUP OR PROJECT
+//UPCOMING SHOULD SHOW EVERY TASK IN DATE ORDER THAT HAS A DATE
+//COMPLETED SHOULD SHOW TAKS THAT HAVE THE PROPERTY COMPLETED
+
+//COMPLETED BUTTON SAHOULD CHANGE THE TASK PROPERTY TO COMPLETED
+//EDIT SHOULD OPEN THE FORM BUT WITH THE TASK PROPERTIES PRE FILLED
+//DELETE SHOULD DELETE THE TASK FROM THE TASK ARRAY

@@ -41,7 +41,7 @@ body {
     border: 1px solid black; 
 }
 
-.mainGroup {
+.mainGroup, .projectGroup {
     border: 1px solid black;
     margin: 10px;
     padding: 10px;
@@ -51,13 +51,28 @@ body {
     list-style-type: none;
 }
 
+
+
 .showFormBtn {
     position: absolute;
     right: 0;
     top: 0;
 }
 
-#newTaskForm {
+#projectForm {
+    width: 250px;
+    height: 250px;
+    position: fixed;
+    margin: 0 auto;
+    left: calc(50% - 125px);
+    top: calc(50% - 125px);
+    border: 1px solid black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#taskForm {
     width: 250px;
     height: 250px;
     position: fixed;
@@ -71,12 +86,13 @@ body {
     justify-content: space-between;
 }
 
-.cardSection {
+.cardSection, .completedTasksSection {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    
 }
+
+
 
 .card {
     margin: 10px;
