@@ -1,4 +1,5 @@
-import { createTaskForm } from "./forms.js";
+import { createTaskForm, selectProjectForm } from "./forms.js";
+
 
 const createTask  = (title, description, dueDate, priority) => {
     return {
@@ -17,11 +18,8 @@ const createTask  = (title, description, dueDate, priority) => {
         get completionStatus() {
             return 'no';
         },   
-
     }
 };
-
-
 
 const createTaskCard = (task) => {
     const card = document.createElement('div');
@@ -34,6 +32,7 @@ const createTaskCard = (task) => {
     taskDescription.textContent = 'Note: ' + task.description;
 
     const taskDueDate = document.createElement('p');
+    taskDueDate.classList.add('cardDate');
     taskDueDate.textContent = 'Due Date: ' + task.dueDate;
 
     if (task.priority == 'low') {
@@ -49,23 +48,44 @@ const createTaskCard = (task) => {
     completeBtn.textContent = 'Completed';
     completeBtn.addEventListener('click', () => {
         card.classList.add('completed');
+        const completedTasksSection = document.querySelector('.completedTasksSection');
+        completedTasksSection.appendChild(card);
     });
 
     const editBtn = document.createElement('button');
     editBtn.classList.add('editBtn');
     editBtn.textContent = 'Edit';
-    /*editBtn.addEventListener('click', () => {
+    editBtn.addEventListener('click', () => {
         const form = document.getElementById('taskForm');
         form.title.value = task.title;
         form.description.value = task.description;
         form.dueDate.value = task.dueDate;
         form.priority.value = task.priority;
         form.style.display = 'flex';
-    })*/
+    });
 
     const delBtn = document.createElement('button');
     delBtn.classList.add('delBtn');
     delBtn.textContent = 'Delete';
+    delBtn.addEventListener('click', () => {
+        card.remove();
+    });
+
+    const addToProjectBtn = document.createElement('button');
+    addToProjectBtn.classList.add('addToProjectBtn');
+    addToProjectBtn.textContent = 'Add To Project';
+    addToProjectBtn.addEventListener('click', () => {
+        const mainWrapper = document.querySelector('.mainWrapper');
+        let form = selectProjectForm();
+        mainWrapper.appendChild(form);
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            form.style.display = 'none';
+            console.log(document.querySelector("."+form.currentProjects.value));
+            
+        })
+
+    })
 
     card.appendChild(taskTitle);
     card.appendChild(taskDescription);
@@ -73,13 +93,12 @@ const createTaskCard = (task) => {
     card.appendChild(completeBtn);
     card.appendChild(editBtn);
     card.appendChild(delBtn);
+    card.appendChild(addToProjectBtn);
 
     return card;
 };
 
 const createTaskSection = () => {
-    const currentCardSection = [];
-    
     const cardSection = document.createElement('div');
     cardSection.classList.add('cardSection');
 
@@ -91,30 +110,20 @@ const createTaskSection = () => {
     addTaskBtn.textContent = 'Add Task';
     addTaskBtn.addEventListener('click', showForm);
 
-    cardSection.appendChild(form);
-    cardSection.appendChild(addTaskBtn);
+    
     
     const defaultTask = createTaskCard(createTask('First To-Do', 'This is my first task', '2022-05-23', 'high'));
-    currentCardSection.push(defaultTask);
-    cardSection.appendChild(defaultTask);
     
-
-
-
+    cardSection.appendChild(defaultTask);
+    cardSection.appendChild(addTaskBtn);
+    cardSection.appendChild(form);
 
 
 
     function addToCardSection(e) {
         e.preventDefault();
         let newCard = createTaskCard(createTask(form.title.value, form.description.value, form.dueDate.value, form.priority.value));
-        currentCardSection.push(newCard);
-        currentCardSection.forEach(card => {
-            cardSection.appendChild(card)
-            // card.querySelector('.delBtn').addEventListener('click', () => {
-            //     currentCardSection.splice(currentCardSection.indexOf(card), 1)
-            // });
-        });
-        console.log(currentCardSection);
+        cardSection.appendChild(newCard);
         clearTaskForm();
     };
 

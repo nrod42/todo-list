@@ -9,7 +9,7 @@ const createTaskForm = () => {
     const titleInput = document.createElement('input');
     titleInput.type = "text";
     titleInput.id = "title";
-    titleInput.name = "title"
+    titleInput.name = "title";
 
     const descriptionLabel = document.createElement('label');
     descriptionLabel.textContent = 'Description:';
@@ -25,7 +25,7 @@ const createTaskForm = () => {
     dueDateLabel.for = "dueDate";
 
     const dueDateInput = document.createElement('input');
-    dueDateInput.type = "date";
+    dueDateInput.type = "text";
     dueDateInput.id = "dueDate";
     dueDateInput.name = "dueDate";
 
@@ -68,8 +68,6 @@ const createTaskForm = () => {
     priorityInput.appendChild(high);
     form.appendChild(submitBtn);
 
-    form.style.display = 'none';
-
     return form;
 };
 
@@ -83,7 +81,7 @@ const createProjectForm = () => {
     projectNameLabel.for = "projectName";
 
     const projectNameInput = document.createElement('input');
-    projectNameInput.type = "projectName";
+    projectNameInput.type = "text";
     projectNameInput.id = "projectName";
     projectNameInput.name = "projectName";
 
@@ -106,4 +104,35 @@ const clearProjectForm = () => {
     form.style.display = 'none';
 }
 
-export { createTaskForm, createProjectForm, clearProjectForm };
+const selectProjectForm = () => {
+    const allGroups = Array.from(document.querySelectorAll('.projectGroup > button'));
+    
+    const addToProjectForm = document.createElement('form');
+    addToProjectForm.id = 'addToProjectForm';
+
+    const chooseProjectLabel = document.createElement('label');
+    chooseProjectLabel.textContent = 'Select a project: ';
+    chooseProjectLabel.for = "currentProjects";
+
+    const currentProjects = document.createElement('select');
+    currentProjects.name = "currentProjects";
+    currentProjects.id = "currentProjects";
+    
+    allGroups.forEach(group => {
+        let option = document.createElement('option');
+        option.textContent = group.textContent
+        currentProjects.appendChild(option);
+    })
+
+    const submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.textContent = 'Add to Project';
+
+    addToProjectForm.appendChild(chooseProjectLabel);
+    addToProjectForm.appendChild(currentProjects);
+    addToProjectForm.appendChild(submitBtn);
+
+    return addToProjectForm
+}
+
+export { createTaskForm, createProjectForm, clearProjectForm, selectProjectForm };

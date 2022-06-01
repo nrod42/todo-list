@@ -1,4 +1,4 @@
-const makeNav = () => {
+const createNav = () => {
     
     const navBar = document.createElement('div');
     navBar.classList.add('nav');
@@ -15,4 +15,4 @@ const makeNav = () => {
     return navBar
 };
 
-export default makeNav;
+export default createNav;
