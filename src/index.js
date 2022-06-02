@@ -43,3 +43,6 @@ priority
 //one of the modules should be in charge of creating the different pages (tasks, completed, today, upcoming...)
 
 //BRUH, couldnt you make the facotry function spit out the individual html elements? Like obj.title would make the value of the title property to a p'p' element!
+
+
+//currently

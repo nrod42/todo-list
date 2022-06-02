@@ -48,29 +48,35 @@ const createSidebar = () => {
     function showInboxSection () {
         const cardSection = document.querySelector('.cardSection');
         const todaySection = document.querySelector('.todaySection');
-        const completedTasksSection = document.querySelector('.completedTasksSection'); 
+        const completedTasksSection = document.querySelector('.completedTasksSection');
+        const newPage = document.querySelector('.newPage');
         cardSection.style.display = 'flex';
         todaySection.style.display = 'none';
         completedTasksSection.style.display = 'none';
+        newPage.style.display = 'none';
     }
 
     function showTodaySection () {
         const todaySection = document.querySelector('.todaySection');
         const cardSection = document.querySelector('.cardSection');
-        const completedTasksSection = document.querySelector('.completedTasksSection'); 
+        const completedTasksSection = document.querySelector('.completedTasksSection');
+        const newPage = document.querySelector('.newPage');
         getTodayCards();
         todaySection.style.display = 'flex';
         cardSection.style.display = 'none';
         completedTasksSection.style.display = 'none';
+        newPage.style.display = 'none';
     }
 
     function showCompletedSection () {
         const completedTasksSection = document.querySelector('.completedTasksSection');
         const cardSection = document.querySelector('.cardSection');
         const todaySection = document.querySelector('.todaySection');
+        const newPage = document.querySelector('.newPage');
         completedTasksSection.style.display = 'flex';
         cardSection.style.display = 'none';
         todaySection.style.display = 'none';
+        newPage.style.display = 'none';
     }
 
     function getTodayCards () {
@@ -91,24 +97,32 @@ const createProjectGroup = (e) => {
     e.preventDefault();
     const sidebar = document.querySelector('.sidebar');
     const projectForm = document.getElementById('projectForm');
+    const mainWrapper = document.querySelector('.mainWrapper');
 
     const projectGroup = document.createElement('div');
     projectGroup.classList.add('projectGroup');
+    projectGroup.classList.add(projectForm.projectName.value)
 
     const projectName = document.createElement('button');
     projectName.textContent = projectForm.projectName.value;
 
-    projectName.addEventListener('click', () => {
-        const mainWrapper = document.querySelector('.mainWrapper');
+    const newPage = createPage();
+    newPage.setAttribute('id', projectForm.projectName.value)
+    mainWrapper.appendChild(newPage);
+
+    projectName.addEventListener('click', (e) => {
+        const projectPage = document.getElementById(e.target.textContent);
         const completedTasksSection = document.querySelector('.completedTasksSection');
         const cardSection = document.querySelector('.cardSection');
         const todaySection = document.querySelector('.todaySection');
 
-        let newPage = createPage();
-        //console.log(projectForm.projectName)
-        mainWrapper.appendChild(newPage);
+        const allGroups = Array.from(document.querySelectorAll('.newPage'));
+        allGroups.forEach(group => {
+            let groupPage = document.getElementById(group.id);
+            groupPage.style.display = 'none';
+        })
+        projectPage.style.display = 'flex';
 
-        newPage.style.display = 'flex';
         completedTasksSection.style.display = 'none';
         cardSection.style.display = 'none';
         todaySection.style.display = 'none';

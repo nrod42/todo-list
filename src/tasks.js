@@ -78,13 +78,19 @@ const createTaskCard = (task) => {
         const mainWrapper = document.querySelector('.mainWrapper');
         let form = selectProjectForm();
         mainWrapper.appendChild(form);
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             form.style.display = 'none';
-            console.log(document.querySelector("."+form.currentProjects.value));
+            //this works but, when i add something to a project, do i want it to disappear from inbox?
+            const selectedProjectSection = document.getElementById(form.currentProjects.value);
+            
+            selectedProjectSection.appendChild(card);
+    
+            
+            //give each card an ID to make things cleaner...?
             
         })
-
     })
 
     card.appendChild(taskTitle);
@@ -109,16 +115,12 @@ const createTaskSection = () => {
     addTaskBtn.classList.add('addTaskBtn');
     addTaskBtn.textContent = 'Add Task';
     addTaskBtn.addEventListener('click', showForm);
-
-    
     
     const defaultTask = createTaskCard(createTask('First To-Do', 'This is my first task', '2022-05-23', 'high'));
     
     cardSection.appendChild(defaultTask);
     cardSection.appendChild(addTaskBtn);
     cardSection.appendChild(form);
-
-
 
     function addToCardSection(e) {
         e.preventDefault();

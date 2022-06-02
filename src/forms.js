@@ -25,7 +25,7 @@ const createTaskForm = () => {
     dueDateLabel.for = "dueDate";
 
     const dueDateInput = document.createElement('input');
-    dueDateInput.type = "text";
+    dueDateInput.type = "date";
     dueDateInput.id = "dueDate";
     dueDateInput.name = "dueDate";
 
@@ -120,7 +120,8 @@ const selectProjectForm = () => {
     
     allGroups.forEach(group => {
         let option = document.createElement('option');
-        option.textContent = group.textContent
+        option.textContent = group.textContent;
+        option.value = group.textContent;
         currentProjects.appendChild(option);
     })
 
