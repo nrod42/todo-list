@@ -43,6 +43,10 @@ const createTaskCard = (task) => {
         card.style.border = '1px solid red';
     }
 
+    const btnWrapper = document.createElement('div');
+    btnWrapper.classList.add('btnWrapper');
+
+
     const completeBtn = document.createElement('button');
     completeBtn.classList.add('completeBtn');
     completeBtn.textContent = 'Completed';
@@ -84,7 +88,6 @@ const createTaskCard = (task) => {
             form.style.display = 'none';
             //this works but, when i add something to a project, do i want it to disappear from inbox?
             const selectedProjectSection = document.getElementById(form.currentProjects.value);
-            
             selectedProjectSection.appendChild(card);
     
             
@@ -93,13 +96,17 @@ const createTaskCard = (task) => {
         })
     })
 
+    btnWrapper.appendChild(completeBtn);
+    btnWrapper.appendChild(editBtn);
+    btnWrapper.appendChild(delBtn);
+    btnWrapper.appendChild(addToProjectBtn);
+
+
     card.appendChild(taskTitle);
     card.appendChild(taskDescription);
     card.appendChild(taskDueDate);
-    card.appendChild(completeBtn);
-    card.appendChild(editBtn);
-    card.appendChild(delBtn);
-    card.appendChild(addToProjectBtn);
+    card.appendChild(btnWrapper);
+
 
     return card;
 };
@@ -117,9 +124,9 @@ const createTaskSection = () => {
     addTaskBtn.addEventListener('click', showForm);
     
     const defaultTask = createTaskCard(createTask('First To-Do', 'This is my first task', '2022-05-23', 'high'));
-    
-    cardSection.appendChild(defaultTask);
+
     cardSection.appendChild(addTaskBtn);
+    cardSection.appendChild(defaultTask);
     cardSection.appendChild(form);
 
     function addToCardSection(e) {

@@ -1,7 +1,5 @@
 import {createProjectForm, clearProjectForm} from './forms.js';
 import { createPage } from './pages.js';
-import { completedSection } from './completed.js';
-import { createTaskSection } from './tasks.js';
 
 const createSidebar = () => {
     const sidebar = document.createElement('div');
@@ -43,52 +41,63 @@ const createSidebar = () => {
     function showProjectForm () {
         projectForm.style.display = 'flex';
         sidebar.appendChild(projectForm);
-    }
+    };
 
     function showInboxSection () {
         const cardSection = document.querySelector('.cardSection');
         const todaySection = document.querySelector('.todaySection');
         const completedTasksSection = document.querySelector('.completedTasksSection');
-        const newPage = document.querySelector('.newPage');
+
+        while (todaySection.firstChild) {
+            todaySection.removeChild(todaySection.firstChild);
+        }
+
+        hideProjectPages ()
         cardSection.style.display = 'flex';
         todaySection.style.display = 'none';
         completedTasksSection.style.display = 'none';
-        newPage.style.display = 'none';
-    }
+    };
 
     function showTodaySection () {
         const todaySection = document.querySelector('.todaySection');
         const cardSection = document.querySelector('.cardSection');
         const completedTasksSection = document.querySelector('.completedTasksSection');
-        const newPage = document.querySelector('.newPage');
+
         getTodayCards();
+        hideProjectPages ()
         todaySection.style.display = 'flex';
         cardSection.style.display = 'none';
         completedTasksSection.style.display = 'none';
-        newPage.style.display = 'none';
-    }
+
+    };
 
     function showCompletedSection () {
         const completedTasksSection = document.querySelector('.completedTasksSection');
         const cardSection = document.querySelector('.cardSection');
         const todaySection = document.querySelector('.todaySection');
-        const newPage = document.querySelector('.newPage');
+        hideProjectPages ()
         completedTasksSection.style.display = 'flex';
         cardSection.style.display = 'none';
         todaySection.style.display = 'none';
-        newPage.style.display = 'none';
-    }
+    };
 
     function getTodayCards () {
         const todaySection = document.querySelector('.todaySection');
         const allCards = Array.from(document.querySelectorAll('.card'));
-        //const cardDates = Array.from(document.querySelectorAll('.cardDate'));
+        if (todaySection.firstChild) return;
         allCards.forEach(card => {
-            if (card.querySelector('.cardDate').textContent.slice(10,20) == new Date().toISOString().slice(0, 10)) {
-                todaySection.appendChild(card)
+            if (card.querySelector('.cardDate').textContent.slice(10) == new Date().toISOString().slice(0, 10)) {
+                todaySection.appendChild(card.cloneNode(true));
             };
         });
-    }
+    };
+
+    function hideProjectPages () {
+        const allProjects = Array.from(document.querySelectorAll('.newPage'));
+        allProjects.forEach(project => {
+            project.style.display = 'none';
+        });
+    };
 
     return sidebar;
 };
@@ -101,7 +110,7 @@ const createProjectGroup = (e) => {
 
     const projectGroup = document.createElement('div');
     projectGroup.classList.add('projectGroup');
-    projectGroup.classList.add(projectForm.projectName.value)
+
 
     const projectName = document.createElement('button');
     projectName.textContent = projectForm.projectName.value;
@@ -122,7 +131,6 @@ const createProjectGroup = (e) => {
             groupPage.style.display = 'none';
         })
         projectPage.style.display = 'flex';
-
         completedTasksSection.style.display = 'none';
         cardSection.style.display = 'none';
         todaySection.style.display = 'none';

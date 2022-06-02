@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 :root {
@@ -12,17 +13,20 @@ html {
 }
 
 body {
+
     height: 100vh;
     min-width: 100vw;
 }
 
 .mainWrapper {
-
+    margin: 0 200px;
+    /*padding: 0 200px;*/
     height: 100%;
-    width: 100%;
+    
     display: grid;
     grid-template-columns: minmax(150px, 15%) 1fr;
     grid-template-rows: 5% 1fr;
+    
 }
 
 .nav {
@@ -34,28 +38,25 @@ body {
 
 .nav div {
     width: 50%;
-
 }
 
 .sidebar {
     border: 1px solid black; 
 }
 
-.mainGroup, .projectGroup {
-    border: 1px solid black;
+.mainGroup, .projectGroup {   
     margin: 10px;
     padding: 10px;
     display: flex;
     flex-direction: column;
 }
 
-.mainGroup li {
-    list-style-type: none;
-
+.mainGroup button, .projectGroup button {
+    margin: 10px 0;
 }
 
 .addTaskBtn {
-    position: absolute;
+    position: relative;
     right: 0;
     top: 0;
 }
@@ -68,19 +69,21 @@ body {
     left: calc(50% - 125px);
     top: calc(50% - 125px);
     border: 1px solid black;
+    border-radius: 5px;
     padding: 10px;
     display: none;
     flex-direction: column;
 }
 
 #taskForm {
-    width: 250px;
-    height: 250px;
+    width: 370px;
+    height: 370px;
     position: fixed;
     margin: 0 auto;
-    left: calc(50% - 125px);
-    top: calc(50% - 125px);
+    left: calc(50% - 185px);
+    top: calc(50% - 185px);
     border: 1px solid black;
+    border-radius: 5px;
     padding: 10px;
     display: none;
     flex-direction: column;
@@ -95,6 +98,7 @@ body {
     left: calc(50% - 125px);
     top: calc(50% - 125px);
     border: 1px solid black;
+    border-radius: 5px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -103,6 +107,7 @@ body {
 
 .cardSection {
     border: 1px solid black;
+    
     display: flex;
     flex-direction: column;
 }
@@ -113,8 +118,8 @@ body {
     flex-direction: column;
 }
 
-
 .card {
+    position: relative;
     margin: 10px;
     padding: 10px;
     border: 1px solid black;
@@ -125,8 +130,11 @@ body {
     padding: 5px;
 }
 
-.completeBtn, .editBtn, .delBtn, .addToProjectBtn {
-    position: relative;
-    top: -80px;
-    left: 85%;
+
+.btnWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 10px;
 }
