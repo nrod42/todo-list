@@ -1,6 +1,3 @@
-import {createProjectForm, clearProjectForm} from './forms.js';
-import { createPage } from './pages.js';
-
 const createSidebar = () => {
     const sidebar = document.createElement('div');
     sidebar.classList.add('sidebar');
@@ -9,96 +6,34 @@ const createSidebar = () => {
     addProjectBtn.classList.add('addProjectBtn');
     addProjectBtn.textContent = 'New Project';
 
-    const projectForm = createProjectForm();
-    addProjectBtn.addEventListener('click', showProjectForm);
-    projectForm.addEventListener('submit', createProjectGroup);
-
     const mainGroup = document.createElement('div');
     mainGroup.classList.add('mainGroup');
 
-    const inbox = document.createElement('button');
-    inbox.textContent = 'Inbox';
-    inbox.addEventListener('click', showInboxSection);
-    
-    const today = document.createElement('button');
-    today.textContent = 'Today';
-    today.addEventListener('click', showTodaySection);
+    const inboxBtn = document.createElement('button');
+    inboxBtn.textContent = 'Inbox';
 
-    const upcoming = document.createElement('button');
-    upcoming.textContent = 'Upcoming';
+    const todayBtn = document.createElement('button');
+    todayBtn.textContent = 'Today';
+
+    const upcomingBtn = document.createElement('button');
+    upcomingBtn.textContent = 'Upcoming';
     
-    const completed = document.createElement('button');
-    completed.textContent = 'Completed';
-    completed.addEventListener('click', showCompletedSection);
+    const completedBtn = document.createElement('button');
+    completedBtn.textContent = 'Completed';
+
+
+    inboxBtn.classList.add('inboxBtn');
+    todayBtn.classList.add('todayBtn');
+    upcomingBtn.classList.add('upcomingBtn');
+    completedBtn.classList.add('completedBtn');
 
     sidebar.appendChild(addProjectBtn);
     sidebar.appendChild(mainGroup);
-    mainGroup.appendChild(inbox);
-    mainGroup.appendChild(today);
-    mainGroup.appendChild(upcoming);
-    mainGroup.appendChild(completed);
-
-    function showProjectForm () {
-        projectForm.style.display = 'flex';
-        sidebar.appendChild(projectForm);
-    };
-
-    function showInboxSection () {
-        const cardSection = document.querySelector('.cardSection');
-        const todaySection = document.querySelector('.todaySection');
-        const completedTasksSection = document.querySelector('.completedTasksSection');
-
-        while (todaySection.firstChild) {
-            todaySection.removeChild(todaySection.firstChild);
-        }
-
-        hideProjectPages ()
-        cardSection.style.display = 'flex';
-        todaySection.style.display = 'none';
-        completedTasksSection.style.display = 'none';
-    };
-
-    function showTodaySection () {
-        const todaySection = document.querySelector('.todaySection');
-        const cardSection = document.querySelector('.cardSection');
-        const completedTasksSection = document.querySelector('.completedTasksSection');
-
-        getTodayCards();
-        hideProjectPages ()
-        todaySection.style.display = 'flex';
-        cardSection.style.display = 'none';
-        completedTasksSection.style.display = 'none';
-
-    };
-
-    function showCompletedSection () {
-        const completedTasksSection = document.querySelector('.completedTasksSection');
-        const cardSection = document.querySelector('.cardSection');
-        const todaySection = document.querySelector('.todaySection');
-        hideProjectPages ()
-        completedTasksSection.style.display = 'flex';
-        cardSection.style.display = 'none';
-        todaySection.style.display = 'none';
-    };
-
-    function getTodayCards () {
-        const todaySection = document.querySelector('.todaySection');
-        const allCards = Array.from(document.querySelectorAll('.card'));
-        if (todaySection.firstChild) return;
-        allCards.forEach(card => {
-            if (card.querySelector('.cardDate').textContent.slice(10) == new Date().toISOString().slice(0, 10)) {
-                todaySection.appendChild(card.cloneNode(true));
-            };
-        });
-    };
-
-    function hideProjectPages () {
-        const allProjects = Array.from(document.querySelectorAll('.newPage'));
-        allProjects.forEach(project => {
-            project.style.display = 'none';
-        });
-    };
-
+    mainGroup.appendChild(inboxBtn);
+    mainGroup.appendChild(todayBtn);
+    mainGroup.appendChild(upcomingBtn);
+    mainGroup.appendChild(completedBtn);
+    
     return sidebar;
 };
 

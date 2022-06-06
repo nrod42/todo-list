@@ -56,7 +56,7 @@ body {
 }
 
 .addTaskBtn {
-    position: relative;
+    position: absolute;
     right: 0;
     top: 0;
 }
@@ -105,17 +105,22 @@ body {
     justify-content: space-between;
 }
 
-.cardSection {
+.project {
     border: 1px solid black;
-    
     display: flex;
     flex-direction: column;
 }
 
-.todaySection, .completedTasksSection, .newPage {
-    border: 1px solid black;
+.today {
     display: none;
-    flex-direction: column;
+}
+
+.upcoming {
+    display: none;
+}
+
+.completed {
+    display: none;
 }
 
 .card {
@@ -130,6 +135,17 @@ body {
     padding: 5px;
 }
 
+.lowPriority {
+    border: 1px solid blue;
+}
+
+.medPriority {
+    border: 1px solid gold;
+}
+
+.highPriority {
+    border: 1px solid red;
+}
 
 .btnWrapper {
     position: absolute;

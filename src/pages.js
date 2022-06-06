@@ -1,8 +1,26 @@
-const createPage = () => {
-    const newPage = document.createElement('div');
-    newPage.classList.add('newPage');
+const createNav = () => {
+    
+    const nav = document.createElement('div');
+    nav.classList.add('nav');
 
-    return newPage;
+    const navLeft = document.createElement('div');
+    const navRight = document.createElement('div');
+
+    navLeft.textContent = 'Logo';
+    navRight.textContent = 'Future Buttons';
+
+    nav.appendChild(navLeft);
+    nav.appendChild(navRight);
+    
+    return nav;
+};
+
+
+const createProject = () => {
+    const project = document.createElement('div');
+    project.classList.add('project');
+
+    return project;
 }
 
-export { createPage };
+export { createNav, createProject };

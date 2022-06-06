@@ -1,4 +1,4 @@
-const createTaskForm = () => {
+const taskForm = () => {
     const form = document.createElement('form');
     form.id = 'taskForm';
 
@@ -98,10 +98,12 @@ const createProjectForm = () => {
     return projectForm;
 }
 
-const clearProjectForm = () => {
-    const form = document.getElementById('projectForm');
-    form.projectName.value = '';
+const clearForm = (form) => {
     form.style.display = 'none';
+    const allElements = Array.from(form.elements);
+    allElements.forEach(element => {
+        element.value = '';
+    })
 }
 
 const selectProjectForm = () => {
@@ -136,4 +138,4 @@ const selectProjectForm = () => {
     return addToProjectForm
 }
 
-export { createTaskForm, createProjectForm, clearProjectForm, selectProjectForm };
+export { taskForm, createProjectForm, clearForm, selectProjectForm };
