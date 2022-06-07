@@ -1,3 +1,5 @@
+import { actionBtns } from "./buttons";
+
 const createTask  = (title, description, dueDate, priority, project) => {
     return {
         title: title,
@@ -26,10 +28,22 @@ const createTask  = (title, description, dueDate, priority, project) => {
             } else if (this.priority == 'high') {
                 card.classList.add('highPriority')
             };
-        
+
+            //this shouldnt be here
+            const btns = actionBtns();
+            const completeBtn = btns.querySelector('.addToCompletedBtn');
+            completeBtn.addEventListener('click', () => {
+                if (this.completionStatus == 'yes') {
+                    this.completionStatus = 'no'
+                } else if (this.completionStatus == 'no') {
+                    this.completionStatus = 'yes'
+                };
+            });
+             
             card.appendChild(cardTitle);
             card.appendChild(cardDescription);
             card.appendChild(cardDueDate);
+            card.appendChild(btns);
         
             return card;
         }

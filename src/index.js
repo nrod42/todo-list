@@ -40,6 +40,8 @@ const upcomingBtn = document.querySelector('.upcomingBtn');
 const completedBtn = document.querySelector('.completedBtn');
 const addProjectBtn = document.querySelector('.addProjectBtn');
 
+const addToCompletedBtn = document.querySelector('.addToCompletedBtn');
+
 
 //initializes main task array
 let taskList = [];
@@ -59,7 +61,7 @@ taskList.forEach(task => {
 });
 
 
-/** ---------- EVENT LISTENERS --------- **/
+/** ------------------------------ EVENT LISTENERS ----------------------------- **/
 
 //Shows Task Form
 addTaskBtn.addEventListener('click', () => {
@@ -96,11 +98,12 @@ projectForm.addEventListener('submit', (e) => {
     clearForm(projectForm);
 })
 
-//shows inbox section which shows all imcomplete tasks regardless of date
+//Shows inbox section which shows all imcomplete tasks regardless of date
 inboxBtn.addEventListener('click', () => {
     inbox.style.display = 'flex';
     today.style.display = 'none';
     upcoming.style.display = 'none';
+    completed.style.display = 'none';
 });
 
 //Shows only todays tasks
@@ -114,9 +117,10 @@ todayBtn.addEventListener('click', (e) => {
     today.style.display = 'flex';
     inbox.style.display = 'none';
     upcoming.style.display = 'none';
+    completed.style.display = 'none';
 });
 
-//shows tasks sorted by due date, from soonest to latest.
+//Shows tasks sorted by due date, from soonest to latest.
 upcomingBtn.addEventListener('click', () => {
     while (upcoming.firstChild) {
         upcoming.firstChild.remove()
@@ -132,9 +136,24 @@ upcomingBtn.addEventListener('click', () => {
     upcoming.style.display = 'flex';
     inbox.style.display = 'none';
     today.style.display = 'none';
+    completed.style.display = 'none';
 });
 
-
+//Shows completed section with all completed tasks
+completedBtn.addEventListener('click', () => {
+    while (completed.firstChild) {
+        completed.firstChild.remove()
+    };
+    taskList.forEach(task => {
+        if (task.completionStatus == 'yes') {
+            completed.appendChild(task.createCard())
+        }
+    });
+    completed.style.display = 'flex';
+    inbox.style.display = 'none';
+    today.style.display = 'none';
+    upcoming.style.display = 'none';
+});
 
 
 
