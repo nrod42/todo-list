@@ -1,5 +1,3 @@
-
-
 const createTask  = (title, description, dueDate, priority, project) => {
     return {
         title: title,
