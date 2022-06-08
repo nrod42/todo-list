@@ -104,15 +104,19 @@ body {
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .project {
     border: 1px solid black;
-    display: flex;
+    display: none;
     flex-direction: column;
+}
+
+.inbox {
+    display: flex;
 }
 
 .today {

@@ -57,17 +57,43 @@ const createProjectGroup = () => {
     const projectGroup = document.createElement('div');
     projectGroup.classList.add('projectGroup');
 
-    const projectGroupBtn = document.createElement('button');
-    projectGroupBtn.classList.add('projectGroupBtn');
 
     return projectGroup
 }
 
-const createProject = () => {
-    const project = document.createElement('div');
-    project.classList.add('project');
+const createPage = () => {
+    const page = document.createElement('div');
+    page.classList.add('project');
 
-    return project;
+    return page;
 }
 
-export { createNav, createSidebar, createProjectGroup, createProject };
+const actionBtns = () => {
+    const btnWrapper = document.createElement('div');
+    btnWrapper.classList.add('btnWrapper');
+
+    const addToCompletedBtn = document.createElement('button');
+    addToCompletedBtn.textContent = 'Completed';
+    addToCompletedBtn.classList.add('addToCompletedBtn');
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.classList.add('editBtn');
+
+    const delBtn = document.createElement('button');
+    delBtn.textContent = 'Delete';
+    delBtn.classList.add('delBtn');
+
+    const addToProjectBtn = document.createElement('button');
+    addToProjectBtn.textContent = 'Add To Project';
+    addToProjectBtn.classList.add('addToProjectBtn');
+
+    btnWrapper.appendChild(addToCompletedBtn) 
+    btnWrapper.appendChild(editBtn);
+    btnWrapper.appendChild(delBtn);
+    btnWrapper.appendChild(addToProjectBtn);
+
+    return btnWrapper;
+}
+
+export { createNav, createSidebar, createProjectGroup, createPage, actionBtns };

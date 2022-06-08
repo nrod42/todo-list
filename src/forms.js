@@ -104,8 +104,7 @@ const clearForm = (form) => {
     })
 }
 
-const selectProjectForm = () => {
-    const allGroups = Array.from(document.querySelectorAll('.projectGroup > button'));
+const createSelectProjectForm = () => {
     
     const addToProjectForm = document.createElement('form');
     addToProjectForm.id = 'addToProjectForm';
@@ -117,13 +116,6 @@ const selectProjectForm = () => {
     const currentProjects = document.createElement('select');
     currentProjects.name = "currentProjects";
     currentProjects.id = "currentProjects";
-    
-    allGroups.forEach(group => {
-        let option = document.createElement('option');
-        option.textContent = group.textContent;
-        option.value = group.textContent;
-        currentProjects.appendChild(option);
-    })
 
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
@@ -136,4 +128,4 @@ const selectProjectForm = () => {
     return addToProjectForm
 }
 
-export { createTaskForm, createProjectForm, clearForm };
+export { createTaskForm, createProjectForm, clearForm, createSelectProjectForm };

@@ -1,6 +1,7 @@
-import { createNav, createSidebar, createProjectGroup, createProject } from './pages.js';
+import { createNav, createSidebar, createProjectGroup, createPage, actionBtns } from './render.js';
 import { createTask } from './createTask.js';
-import { createTaskForm, createProjectForm, clearForm} from './forms.js';
+import { createTaskForm, createProjectForm, clearForm, createSelectProjectForm} from './forms.js';
+import { markComplete, del, showAddToProjectForm, addProjectPages } from './buttons.js';
 import './styles.css';
 
 const mainWrapper = document.querySelector('.mainWrapper');
@@ -10,10 +11,11 @@ const nav = createNav();
 const sidebar = createSidebar();
 const taskForm = createTaskForm();
 const projectForm = createProjectForm();
-const inbox = createProject();
-const today = createProject();
-const upcoming = createProject();
-const completed = createProject();
+const selectProjectForm = createSelectProjectForm();
+const inbox = createPage();
+const today = createPage();
+const upcoming = createPage();
+const completed = createPage();
 
 inbox.classList.add('inbox');
 today.classList.add('today');
@@ -29,6 +31,7 @@ mainWrapper.appendChild(sidebar);
 mainWrapper.appendChild(addTaskBtn);
 mainWrapper.appendChild(taskForm);
 mainWrapper.appendChild(projectForm);
+mainWrapper.appendChild(selectProjectForm);
 mainWrapper.appendChild(inbox);
 mainWrapper.appendChild(today);
 mainWrapper.appendChild(upcoming);
@@ -40,11 +43,10 @@ const upcomingBtn = document.querySelector('.upcomingBtn');
 const completedBtn = document.querySelector('.completedBtn');
 const addProjectBtn = document.querySelector('.addProjectBtn');
 
-const addToCompletedBtn = document.querySelector('.addToCompletedBtn');
-
 
 //initializes main task array
 let taskList = [];
+let completedTasks = [];
 
 //Gets current date in ISO format
 let currentDate = new Date();
@@ -57,9 +59,13 @@ currentDate = yyyy + '-' + mm + '-' + dd;
 const defaultTask = createTask('First', 'This is my first task', currentDate, 'high', 'Project1');
 taskList.push(defaultTask);
 taskList.forEach(task => {
-    inbox.appendChild(task.createCard())
+    let card = task.createCard();
+    card.appendChild(actionBtns());
+    
+    inbox.appendChild(card);
+    markComplete(taskList, completedTasks);
+    del(taskList);
 });
-
 
 /** ------------------------------ EVENT LISTENERS ----------------------------- **/
 
@@ -71,7 +77,9 @@ addTaskBtn.addEventListener('click', () => {
 //Shows Project Form
 addProjectBtn.addEventListener('click', () => {
     projectForm.style.display = 'flex';
-})
+});
+
+
 
 //Task Form Submit Event Listener - Adds new tasks to inbox section
 taskForm.addEventListener('submit', (e) => {
@@ -81,8 +89,15 @@ taskForm.addEventListener('submit', (e) => {
     };
     const newTask = createTask(taskForm.title.value, taskForm.description.value, taskForm.dueDate.value, taskForm.priority.value);
     taskList.push(newTask);
-    taskList.forEach(task => inbox.appendChild(task.createCard()));
+    taskList.forEach(task => {
+        let card = task.createCard();
+        card.appendChild(actionBtns());
+           
+        inbox.appendChild(card);
+    });
     clearForm(taskForm);
+    markComplete(taskList, completedTasks);
+    del(taskList);
 })
 
 //Project Form Submit Event Listener - Adds a new group section with corresponding button
@@ -96,14 +111,20 @@ projectForm.addEventListener('submit', (e) => {
     group.appendChild(projectGroupBtn);
     sidebar.appendChild(group);
     clearForm(projectForm);
+
+    const projectPage = createPage();
+    projectPage.setAttribute('id', projectGroupBtn.textContent)
+    mainWrapper.appendChild(projectPage);
+
+    addProjectPages();
+
 })
 
 //Shows inbox section which shows all imcomplete tasks regardless of date
 inboxBtn.addEventListener('click', () => {
+    const allProjects = document.querySelectorAll('.project');
+    allProjects.forEach(project => project.style.display = 'none');
     inbox.style.display = 'flex';
-    today.style.display = 'none';
-    upcoming.style.display = 'none';
-    completed.style.display = 'none';
 });
 
 //Shows only todays tasks
@@ -113,11 +134,16 @@ todayBtn.addEventListener('click', (e) => {
         today.firstChild.remove()
     };
     let todayTasks = taskList.filter(task => task.dueDate == currentDate);
-    todayTasks.forEach(task => today.appendChild(task.createCard()));
+    todayTasks.forEach(task => {
+        if (task.completionStatus == 'yes') {
+            return;
+        } else {    
+            today.appendChild(task.createCard());
+        }
+    });
+    const allProjects = document.querySelectorAll('.project');
+    allProjects.forEach(project => project.style.display = 'none');
     today.style.display = 'flex';
-    inbox.style.display = 'none';
-    upcoming.style.display = 'none';
-    completed.style.display = 'none';
 });
 
 //Shows tasks sorted by due date, from soonest to latest.
@@ -129,14 +155,17 @@ upcomingBtn.addEventListener('click', () => {
         return new Date(a.dueDate) - new Date(b.dueDate)
     });
     sortedTasks.forEach(task => {
+        if (task.completionStatus == 'yes') {
+            return
+        } else {
         //if task has no due date, skips it
-        if (task.dueDate == '') return
-        upcoming.appendChild(task.createCard())
+            if (task.dueDate == '') return
+            upcoming.appendChild(task.createCard())
+        }
     });
+    const allProjects = document.querySelectorAll('.project');
+    allProjects.forEach(project => project.style.display = 'none');
     upcoming.style.display = 'flex';
-    inbox.style.display = 'none';
-    today.style.display = 'none';
-    completed.style.display = 'none';
 });
 
 //Shows completed section with all completed tasks
@@ -144,26 +173,44 @@ completedBtn.addEventListener('click', () => {
     while (completed.firstChild) {
         completed.firstChild.remove()
     };
-    taskList.forEach(task => {
-        if (task.completionStatus == 'yes') {
-            completed.appendChild(task.createCard())
-        }
+    completedTasks.forEach(task => {
+        completed.appendChild(task.createCard());
     });
+    const allProjects = document.querySelectorAll('.project');
+    allProjects.forEach(project => project.style.display = 'none');
     completed.style.display = 'flex';
-    inbox.style.display = 'none';
-    today.style.display = 'none';
-    upcoming.style.display = 'none';
 });
 
 
 
+// selectProjectForm.addEventListener('submit', (e) => {
+    // e.preventDefault();
+    // const card = e.target.parentElement; //this is the card itself
+    // const cardId = card.dataset.id;
+    // const page = document.querySelector('.' + selectProjectForm.currentProjects.value)
+    // if (cardId = selectProjectForm.currentProjects.value) {
+    //     newPage.appendChild(card)
+    // }
+//     mainWrapper.appendChild(newPage);
 
-//scratch that, couldnt we have simply made the card format function as function property of each obj?
-//the card making function could be a seperater module which wouyld reference "this"
-//ex: if i make an object from info from a form, i could then call that objects "make card" prop which would return an html "card";
+
+//     selectProjectForm.currentProjects.value
+
+
+
+//     clearForm(selectProjectForm)
+// })
+
+
+
+
+
+//EVERY EVENT LISTENER CAN BE A APRT OF AN EVENT LISTENER OBJ WHERE WE PASS IT THE MAIN AND COMPLETE ARRAYS AND THEN WE JUST CALL THE OBJ FUNCTION IN HERE, INDEX.
+//EX: OBJ.UPCOMING WOULD STILL DO EVERYYTHING IT DOES HERE BUT NOW ITS NOTE HERE ATT ALL. THERE SHOULD BE NO ISSUES BECAUSE, IT STILL HAS ACCESS TO MAIN ARRAY.
+
 //note: this card function should create a card in the "closed state" and then when we click on an arrow lets sat, it will expand open revealing its contents
 
-//each generated card should be added to a main array.
+
 //then, i could have a single module which could export every page needed.
 //THEN forEach obj in the array, run the makeCard function and append them to the default inbox section
 
@@ -173,14 +220,10 @@ completedBtn.addEventListener('click', () => {
 //to do this, we can make a function which checks to see the parent of the card (which should be the page) and append the buttons accordingly.
 
 //when edit is clicked, maybe a new copy of the main form can be opened and when submit is hit these could "set" the properties of that object
-//if obj.completed == 'yes' we can then run obj.makeCard and append it to the completed page
 
-//when today is clicked, a function should be run which loops through the main array, checks each obj in it and checks obj.duedate. if its today, append it to this seciton
-//note: each sidebar button should have an even listener so that every time we click it is essentially rescanning the main array and everything is up to date
+
+
 
 
 //todo:
 //move task card function to seperate module
-//add the action btns, probably on the task card itself
-//make complete status part of obj
-//can we do set for this? like if button clicked, set obj.status to 'complete'
