@@ -17,9 +17,9 @@ const markComplete = (mainArray, completedArray) => {
                     completedArray.push(task);
                     mainArray.splice(mainArray.indexOf(task), 1);
                     card.remove();
-                }
-            })
-        })
+                };
+            });
+        });
     });
 }
 
@@ -33,29 +33,37 @@ const del = (mainArray) => {
                 if (task.id == cardId) {
                     mainArray.splice(mainArray.indexOf(task), 1);
                     card.remove();
-                }
-            })
-        })
-    });
-};
-
-const showAddToProjectForm = () => {
-    const addToProjectBtns = Array.from(document.querySelectorAll('.addToProjectBtn'));
-    addToProjectBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            selectProjectForm.style.display = 'flex';
+                };
+            });
         });
     });
 };
 
-showAddToProjectForm();
-// const allGroups = Array.from(document.querySelectorAll('.projectGroupBtn')); 
-// allGroups.forEach(group => {
-//     let option = document.createElement('option');
-//     option.textContent = group.textContent;
-//     option.value = group.textContent;
-//     selectProjectForm.currentProjects.appendChild(option);
-// }) 
+//Shows Add To Project Form and adds all project options to its drop down
+const showAddToProjectForm = () => {
+    const addToProjectBtns = Array.from(document.querySelectorAll('.addToProjectBtn'));
+    addToProjectBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const addToProjectForm = document.getElementById('addToProjectForm');
+            addToProjectForm.style.display = 'flex';
+            const allGroups = Array.from(document.querySelectorAll('.projectGroupBtn')); 
+            allGroups.forEach(group => {
+                let option = document.createElement('option');
+                option.textContent = group.textContent;
+                option.value = group.textContent;
+                addToProjectForm.currentProjects.appendChild(option);
+            });
+        });
+    });
+};
+
+// const addToProjectForm = document.getElementById('addToProjectForm');
+// addToProjectForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//      
+// });
+
+
 
 const addProjectPages = () => {
     const allGroupBtns = Array.from(document.querySelectorAll('.projectGroupBtn'));
@@ -68,7 +76,5 @@ const addProjectPages = () => {
         });
     });
 };
-
-
 
 export { markComplete, del, showAddToProjectForm, addProjectPages }

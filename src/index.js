@@ -23,8 +23,8 @@ upcoming.classList.add('upcoming');
 completed.classList.add('completed');
 
 const addTaskBtn = document.createElement('button');
-addTaskBtn.textContent = 'Add New Task'
-addTaskBtn.classList.add('addTaskBtn')
+addTaskBtn.textContent = 'Add New Task';
+addTaskBtn.classList.add('addTaskBtn');
 
 mainWrapper.appendChild(nav);
 mainWrapper.appendChild(sidebar);
@@ -43,7 +43,6 @@ const upcomingBtn = document.querySelector('.upcomingBtn');
 const completedBtn = document.querySelector('.completedBtn');
 const addProjectBtn = document.querySelector('.addProjectBtn');
 
-
 //initializes main task array
 let taskList = [];
 let completedTasks = [];
@@ -55,16 +54,21 @@ let mm = String(currentDate.getMonth() + 1).padStart(2, '0');
 let yyyy = currentDate.getFullYear();
 currentDate = yyyy + '-' + mm + '-' + dd;
 
+//Inbox heading
+const inboxHeading = document.createElement('h1');
+inboxHeading.textContent = 'All Tasks';
+inbox.appendChild(inboxHeading);
+
 //Adds default example task to To-Do list
 const defaultTask = createTask('First', 'This is my first task', currentDate, 'high', 'Project1');
 taskList.push(defaultTask);
 taskList.forEach(task => {
     let card = task.createCard();
     card.appendChild(actionBtns());
-    
     inbox.appendChild(card);
     markComplete(taskList, completedTasks);
     del(taskList);
+    showAddToProjectForm();
 });
 
 /** ------------------------------ EVENT LISTENERS ----------------------------- **/
@@ -85,19 +89,21 @@ addProjectBtn.addEventListener('click', () => {
 taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
     while (inbox.firstChild) {
-        inbox.firstChild.remove()
+        inbox.firstChild.remove();
     };
+    inbox.appendChild(inboxHeading);
     const newTask = createTask(taskForm.title.value, taskForm.description.value, taskForm.dueDate.value, taskForm.priority.value);
     taskList.push(newTask);
     taskList.forEach(task => {
         let card = task.createCard();
         card.appendChild(actionBtns());
-           
+        
         inbox.appendChild(card);
     });
     clearForm(taskForm);
     markComplete(taskList, completedTasks);
     del(taskList);
+    showAddToProjectForm();
 })
 
 //Project Form Submit Event Listener - Adds a new group section with corresponding button
@@ -113,12 +119,16 @@ projectForm.addEventListener('submit', (e) => {
     clearForm(projectForm);
 
     const projectPage = createPage();
-    projectPage.setAttribute('id', projectGroupBtn.textContent)
+    projectPage.setAttribute('id', projectGroupBtn.textContent);
+
+    const heading = document.createElement('h1');
+    heading.textContent = projectGroupBtn.textContent;
+
+    projectPage.appendChild(heading);
     mainWrapper.appendChild(projectPage);
-
+    
     addProjectPages();
-
-})
+});
 
 //Shows inbox section which shows all imcomplete tasks regardless of date
 inboxBtn.addEventListener('click', () => {
@@ -131,15 +141,18 @@ inboxBtn.addEventListener('click', () => {
 todayBtn.addEventListener('click', (e) => {
     //wipes old array and replaces it with most current one
     while (today.firstChild) {
-        today.firstChild.remove()
+        today.firstChild.remove();
     };
+    const heading = document.createElement('h1');
+    heading.textContent = 'Today\'s Tasks';
+    today.appendChild(heading);
     let todayTasks = taskList.filter(task => task.dueDate == currentDate);
     todayTasks.forEach(task => {
         if (task.completionStatus == 'yes') {
             return;
         } else {    
             today.appendChild(task.createCard());
-        }
+        };
     });
     const allProjects = document.querySelectorAll('.project');
     allProjects.forEach(project => project.style.display = 'none');
@@ -149,19 +162,22 @@ todayBtn.addEventListener('click', (e) => {
 //Shows tasks sorted by due date, from soonest to latest.
 upcomingBtn.addEventListener('click', () => {
     while (upcoming.firstChild) {
-        upcoming.firstChild.remove()
+        upcoming.firstChild.remove();
     };
+    const heading = document.createElement('h1');
+    heading.textContent = 'Upcoming Tasks';
+    upcoming.appendChild(heading);
     let sortedTasks = taskList.slice().sort((a,b) => {
-        return new Date(a.dueDate) - new Date(b.dueDate)
+        return new Date(a.dueDate) - new Date(b.dueDate);
     });
     sortedTasks.forEach(task => {
         if (task.completionStatus == 'yes') {
-            return
+            return;
         } else {
         //if task has no due date, skips it
-            if (task.dueDate == '') return
-            upcoming.appendChild(task.createCard())
-        }
+            if (task.dueDate == '') return;
+            upcoming.appendChild(task.createCard());
+        };
     });
     const allProjects = document.querySelectorAll('.project');
     allProjects.forEach(project => project.style.display = 'none');
@@ -171,8 +187,11 @@ upcomingBtn.addEventListener('click', () => {
 //Shows completed section with all completed tasks
 completedBtn.addEventListener('click', () => {
     while (completed.firstChild) {
-        completed.firstChild.remove()
+        completed.firstChild.remove();
     };
+    const heading = document.createElement('h1');
+    heading.textContent = 'Completed Tasks';
+    completed.appendChild(heading);
     completedTasks.forEach(task => {
         completed.appendChild(task.createCard());
     });
@@ -182,24 +201,6 @@ completedBtn.addEventListener('click', () => {
 });
 
 
-
-// selectProjectForm.addEventListener('submit', (e) => {
-    // e.preventDefault();
-    // const card = e.target.parentElement; //this is the card itself
-    // const cardId = card.dataset.id;
-    // const page = document.querySelector('.' + selectProjectForm.currentProjects.value)
-    // if (cardId = selectProjectForm.currentProjects.value) {
-    //     newPage.appendChild(card)
-    // }
-//     mainWrapper.appendChild(newPage);
-
-
-//     selectProjectForm.currentProjects.value
-
-
-
-//     clearForm(selectProjectForm)
-// })
 
 
 
