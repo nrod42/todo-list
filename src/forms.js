@@ -98,7 +98,7 @@ const createProjectForm = () => {
 
 const clearForm = (form) => {
     form.style.display = 'none';
-    const allElements = Array.from(form.elements);
+    const allElements = Array.from(form.querySelectorAll('input'));
     allElements.forEach(element => {
         element.value = '';
     })

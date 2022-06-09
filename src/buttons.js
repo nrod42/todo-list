@@ -47,11 +47,9 @@ const showAddToProjectForm = (mainArray) => {
             
             const addToProjectForm = document.getElementById('addToProjectForm'); //the form to select
             addToProjectForm.style.display = 'flex'; //makes form visible
-            let card = '';
-            card = e.target.parentElement.parentElement //this is the card,
-       
+            
+            const card = e.target.parentElement.parentElement //this is the card,
 
-            console.log(card);
             addOptions();
             addProjectToPage(card, mainArray);
 
@@ -81,20 +79,18 @@ function addProjectToPage (card, mainArray) {
         e.preventDefault();
         const projectName = addToProjectForm.currentProjects.value;
         const projectPage = document.getElementById(projectName); //gets the project page where the card will be moved to
-        console.log(card)
-        
 
         //we also need to remove it from the main array
-        const cardId = card.dataset.id;
-        mainArray.forEach(task => {
-            if (task.id == cardId) {
-                mainArray.splice(mainArray.indexOf(task), 1);
-            };
-        });
+        // const cardId = card.dataset.id;
+        // mainArray.forEach(task => {
+        //     if (task.id == cardId) {
+        //         mainArray.splice(mainArray.indexOf(task), 1);
+        //     };
+        // });
         projectPage.appendChild(card); //moves the selected card to page
-        clearForm(addToProjectForm);
+        clearForm(addToProjectForm)
     });
-}
+};
 
 
 
