@@ -68,7 +68,7 @@ taskList.forEach(task => {
     inbox.appendChild(card);
     markComplete(taskList, completedTasks);
     del(taskList);
-    showAddToProjectForm();
+    showAddToProjectForm(taskList);
 });
 
 /** ------------------------------ EVENT LISTENERS ----------------------------- **/
@@ -103,7 +103,7 @@ taskForm.addEventListener('submit', (e) => {
     clearForm(taskForm);
     markComplete(taskList, completedTasks);
     del(taskList);
-    showAddToProjectForm();
+    showAddToProjectForm(taskList);
 })
 
 //Project Form Submit Event Listener - Adds a new group section with corresponding button
