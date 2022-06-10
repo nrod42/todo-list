@@ -1,99 +1,99 @@
 const createNav = () => {
-    
-    const nav = document.createElement('div');
-    nav.classList.add('nav');
+  const nav = document.createElement('div');
+  nav.classList.add('nav');
 
-    const navLeft = document.createElement('div');
-    const navRight = document.createElement('div');
+  const navLeft = document.createElement('div');
+  const navRight = document.createElement('div');
 
-    navLeft.textContent = 'Logo';
-    navRight.textContent = 'Future Buttons';
+  navLeft.textContent = 'Logo';
+  navRight.textContent = 'Future Buttons';
 
-    nav.appendChild(navLeft);
-    nav.appendChild(navRight);
-    
-    return nav;
+  nav.appendChild(navLeft);
+  nav.appendChild(navRight);
+
+  return nav;
 };
 
 const createSidebar = () => {
-    const sidebar = document.createElement('div');
-    sidebar.classList.add('sidebar');
+  const sidebar = document.createElement('div');
+  sidebar.classList.add('sidebar');
 
-    const addProjectBtn = document.createElement('button');
-    addProjectBtn.classList.add('addProjectBtn');
-    addProjectBtn.textContent = 'New Project';
+  const addProjectBtn = document.createElement('button');
+  addProjectBtn.classList.add('addProjectBtn');
+  addProjectBtn.textContent = 'New Project';
 
-    const mainGroup = document.createElement('div');
-    mainGroup.classList.add('mainGroup');
+  const mainGroup = document.createElement('div');
+  mainGroup.classList.add('mainGroup');
 
-    const inboxBtn = document.createElement('button');
-    inboxBtn.textContent = 'Inbox';
+  const inboxBtn = document.createElement('button');
+  inboxBtn.textContent = 'Inbox';
 
-    const todayBtn = document.createElement('button');
-    todayBtn.textContent = 'Today';
+  const todayBtn = document.createElement('button');
+  todayBtn.textContent = 'Today';
 
-    const upcomingBtn = document.createElement('button');
-    upcomingBtn.textContent = 'Upcoming';
-    
-    const completedBtn = document.createElement('button');
-    completedBtn.textContent = 'Completed';
+  const upcomingBtn = document.createElement('button');
+  upcomingBtn.textContent = 'Upcoming';
 
-    inboxBtn.classList.add('inboxBtn');
-    todayBtn.classList.add('todayBtn');
-    upcomingBtn.classList.add('upcomingBtn');
-    completedBtn.classList.add('completedBtn');
+  const completedBtn = document.createElement('button');
+  completedBtn.textContent = 'Completed';
 
-    sidebar.appendChild(addProjectBtn);
-    sidebar.appendChild(mainGroup);
-    mainGroup.appendChild(inboxBtn);
-    mainGroup.appendChild(todayBtn);
-    mainGroup.appendChild(upcomingBtn);
-    mainGroup.appendChild(completedBtn);
-    
-    return sidebar;
+  inboxBtn.classList.add('inboxBtn');
+  todayBtn.classList.add('todayBtn');
+  upcomingBtn.classList.add('upcomingBtn');
+  completedBtn.classList.add('completedBtn');
+
+  sidebar.appendChild(addProjectBtn);
+  sidebar.appendChild(mainGroup);
+  mainGroup.appendChild(inboxBtn);
+  mainGroup.appendChild(todayBtn);
+  mainGroup.appendChild(upcomingBtn);
+  mainGroup.appendChild(completedBtn);
+
+  return sidebar;
 };
 
 const createProjectGroup = () => {
-    const projectGroup = document.createElement('div');
-    projectGroup.classList.add('projectGroup');
+  const projectGroup = document.createElement('div');
+  projectGroup.classList.add('projectGroup');
 
-
-    return projectGroup
-}
+  return projectGroup;
+};
 
 const createPage = () => {
-    const page = document.createElement('div');
-    page.classList.add('project');
+  const page = document.createElement('div');
+  page.classList.add('project');
 
-    return page;
-}
+  return page;
+};
 
 const actionBtns = () => {
-    const btnWrapper = document.createElement('div');
-    btnWrapper.classList.add('btnWrapper');
+  const btnWrapper = document.createElement('div');
+  btnWrapper.classList.add('btnWrapper');
 
-    const addToCompletedBtn = document.createElement('button');
-    addToCompletedBtn.textContent = 'Completed';
-    addToCompletedBtn.classList.add('addToCompletedBtn');
+  const addToCompletedBtn = document.createElement('button');
+  addToCompletedBtn.textContent = 'Completed';
+  addToCompletedBtn.classList.add('addToCompletedBtn');
 
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'Edit';
-    editBtn.classList.add('editBtn');
+  const editBtn = document.createElement('button');
+  editBtn.textContent = 'Edit';
+  editBtn.classList.add('editBtn');
 
-    const delBtn = document.createElement('button');
-    delBtn.textContent = 'Delete';
-    delBtn.classList.add('delBtn');
+  const delBtn = document.createElement('button');
+  delBtn.textContent = 'Delete';
+  delBtn.classList.add('delBtn');
 
-    const addToProjectBtn = document.createElement('button');
-    addToProjectBtn.textContent = 'Add To Project';
-    addToProjectBtn.classList.add('addToProjectBtn');
+  const addToProjectBtn = document.createElement('button');
+  addToProjectBtn.textContent = 'Add To Project';
+  addToProjectBtn.classList.add('addToProjectBtn');
 
-    btnWrapper.appendChild(addToCompletedBtn) 
-    btnWrapper.appendChild(editBtn);
-    btnWrapper.appendChild(delBtn);
-    btnWrapper.appendChild(addToProjectBtn);
+  btnWrapper.appendChild(addToCompletedBtn);
+  btnWrapper.appendChild(editBtn);
+  btnWrapper.appendChild(delBtn);
+  btnWrapper.appendChild(addToProjectBtn);
 
-    return btnWrapper;
-}
+  return btnWrapper;
+};
 
-export { createNav, createSidebar, createProjectGroup, createPage, actionBtns };
+export {
+  createNav, createSidebar, createProjectGroup, createPage, actionBtns,
+};

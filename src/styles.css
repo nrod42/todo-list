@@ -11,15 +11,11 @@
 html {
     height: 100vh;
     width: 100vw;
-
-
 }
 
 body {
     height: 100%;
     width: 100%;
-    
-
 }
 
 .mainWrapper {
@@ -30,7 +26,6 @@ body {
     display: grid;
     grid-template-columns: minmax(150px, 15%) 1fr;
     grid-template-rows: 5% 1fr;
-    
 }
 
 .nav {
@@ -144,21 +139,56 @@ body {
 }
 
 .lowPriority {
-    border: 1px solid blue;
+    background-color: blue;
 }
 
 .medPriority {
-    border: 1px solid gold;
+    background-color: gold;
 }
 
 .highPriority {
-    border: 1px solid red;
+    background-color: rgb(228, 54, 54);
 }
 
 .btnWrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
+
     display: flex;
     gap: 10px;
+}
+
+.collapsible {
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.activeCard, .collapsible:hover {
+    
+}
+
+.cardContent {
+    padding: 0 18px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+.collapsible:after {
+    content: '\02795';
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.activeCard:after {
+    content: "\2796"; 
 }
