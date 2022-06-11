@@ -2,7 +2,7 @@
 // like have an 'event' module which is just an obj
 // and each obj prop is each of these functions:
 
-import { clearForm } from "./forms";
+import { clearForm, createTaskForm } from "./forms";
 
 const addCollapsibles = () => {
   const allCollapsibles = Array.from(document.querySelectorAll(".collapsible"));
@@ -55,6 +55,32 @@ const del = (mainArray) => {
         }
       });
       removeCard(card);
+    });
+  });
+};
+
+// click edit opens form
+// get the cards id
+// use cardid to get task in arrays id
+// get that taks info and place it in form
+// when that form is submitted, replace the same task in the array with this "new" task
+const edit = (mainArray) => {
+  const editBtns = Array.from(document.querySelectorAll(".editBtn"));
+  editBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const editForm = document.getElementById("editForm");
+      editForm.style.display = "flex";
+      const card = e.target.parentElement.parentElement.parentElement;
+      const cardId = parseInt(card.dataset.id, 10);
+      mainArray.forEach((task) => {
+        if (task.id === cardId) {
+          editForm.title.value = task.title;
+          editForm.description.value = task.description;
+          editForm.dueDate.value = task.dueDate;
+          editForm.priority.value = task.priority;
+          updateTask(card, mainArray);
+        }
+      });
     });
   });
 };
@@ -128,6 +154,24 @@ function removeCard(card) {
     });
   });
 }
+
+function updateTask(card, mainArray) {
+  const editForm = document.getElementById("editForm");
+  editForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const cardId = parseInt(card.dataset.id, 10);
+    mainArray.forEach((task) => {
+      if (task.id === cardId) {
+        task.title = editForm.title.value;
+        task.description = editForm.description.value;
+        task.dueDate = editForm.dueDate.value;
+        task.priority = editForm.priority.value;
+      }
+    });
+    clearForm(editForm);
+  });
+}
+
 const addProjectPages = () => {
   const allGroupBtns = Array.from(
     document.querySelectorAll(".projectGroupBtn")
@@ -146,6 +190,7 @@ export {
   addCollapsibles,
   markComplete,
   del,
+  edit,
   showAddToProjectForm,
   addProjectPages,
 };

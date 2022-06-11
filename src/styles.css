@@ -74,7 +74,7 @@ body {
     flex-direction: column;
 }
 
-#taskForm {
+#taskForm, #editForm {
     width: 370px;
     height: 370px;
     position: fixed;
@@ -102,6 +102,7 @@ body {
     display: none;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 2;
 }
 
 .project {
@@ -130,8 +131,6 @@ body {
     position: relative;
     margin: 10px;
     padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;;
 }
 
 .card p {
@@ -151,7 +150,6 @@ body {
 }
 
 .btnWrapper {
-
     display: flex;
     gap: 10px;
 }
@@ -168,7 +166,7 @@ body {
 }
 
 .activeCard, .collapsible:hover {
-    
+    filter: brightness(85%);
 }
 
 .cardContent {

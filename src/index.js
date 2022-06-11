@@ -16,6 +16,7 @@ import {
   addCollapsibles,
   markComplete,
   del,
+  edit,
   showAddToProjectForm,
   addProjectPages,
 } from "./buttons";
@@ -27,6 +28,7 @@ const mainWrapper = document.querySelector(".mainWrapper");
 const nav = createNav();
 const sidebar = createSidebar();
 const taskForm = createTaskForm();
+const editForm = createTaskForm();
 const projectForm = createProjectForm();
 const selectProjectForm = createSelectProjectForm();
 const inbox = createPage();
@@ -38,15 +40,13 @@ inbox.classList.add("inbox");
 today.classList.add("today");
 upcoming.classList.add("upcoming");
 completed.classList.add("completed");
-
-const addTaskBtn = document.createElement("button");
-addTaskBtn.textContent = "Add New Task";
-addTaskBtn.classList.add("addTaskBtn");
+taskForm.setAttribute("id", "taskForm");
+editForm.setAttribute("id", "editForm");
 
 mainWrapper.appendChild(nav);
 mainWrapper.appendChild(sidebar);
-mainWrapper.appendChild(addTaskBtn);
 mainWrapper.appendChild(taskForm);
+mainWrapper.appendChild(editForm);
 mainWrapper.appendChild(projectForm);
 mainWrapper.appendChild(selectProjectForm);
 mainWrapper.appendChild(inbox);
@@ -54,6 +54,7 @@ mainWrapper.appendChild(today);
 mainWrapper.appendChild(upcoming);
 mainWrapper.appendChild(completed);
 
+const addTaskBtn = document.querySelector(".addTaskBtn");
 const inboxBtn = document.querySelector(".inboxBtn");
 const todayBtn = document.querySelector(".todayBtn");
 const upcomingBtn = document.querySelector(".upcomingBtn");
@@ -91,6 +92,7 @@ taskList.forEach((task) => {
   addCollapsibles();
   markComplete(taskList, completedTasks);
   del(taskList);
+  // edit(taskList);
   showAddToProjectForm(taskList);
 });
 
@@ -134,6 +136,7 @@ taskForm.addEventListener("submit", (e) => {
   clearForm(taskForm);
   markComplete(taskList, completedTasks);
   del(taskList);
+  // edit(taskList);
   showAddToProjectForm(taskList);
 });
 
@@ -170,6 +173,7 @@ inboxBtn.addEventListener("click", () => {
   taskList.forEach((task) => {
     const card = task.createCard();
     inbox.appendChild(card);
+    edit(taskList);
   });
   addCollapsibles();
   hidePages();
@@ -178,7 +182,7 @@ inboxBtn.addEventListener("click", () => {
 
 // Today Section - Shows all non-completed tasks due today
 todayBtn.addEventListener("click", () => {
-  // wipes old array and replaces it with most current one
+  // Wipes old array and replaces it with most current one
   while (today.firstChild) {
     today.firstChild.remove();
   }
@@ -197,6 +201,7 @@ todayBtn.addEventListener("click", () => {
   addCollapsibles();
   markComplete(taskList, completedTasks);
   del(taskList);
+  // edit(taskList);
   showAddToProjectForm(taskList);
   hidePages();
   today.style.display = "flex";
@@ -226,6 +231,7 @@ upcomingBtn.addEventListener("click", () => {
   addCollapsibles();
   markComplete(taskList, completedTasks);
   del(taskList);
+  // edit(taskList);
   showAddToProjectForm(taskList);
   hidePages();
   upcoming.style.display = "flex";
@@ -245,16 +251,29 @@ completedBtn.addEventListener("click", () => {
   // Scans completed tasks array and creates/appends cards into the completed section
   completedTasks.forEach((task) => {
     completed.appendChild(task.createCard());
+    // const btnWrapper = completed.querySelector(".btnWrapper");
+    // const allBtns = Array.from(btnWrapper.querySelectorAll("button"));
+    // allBtns.forEach((btn) => {
+    //   btn.remove();
+    // });
+    // const incompleteBtn = document.createElement("button");
+    // incompleteBtn.classList.add("incompleteBtn");
+    // incompleteBtn.textContent = "Mark As Incomplete";
+    // btnWrapper.appendChild(incompleteBtn);
+    // incompleteBtn.addEventListener("click", (e) => {
+    //   taskList.push(task);
+    //   completedTasks.splice(completedTasks.indexOf(task), 1);
+    //   e.target.parentElement.parentElement.parentElement.remove();
+    // });
   });
   addCollapsibles();
   hidePages();
   completed.style.display = "flex";
 });
 
+// TOMORROW: IN COMPLETED SECTION, DELETE BUTTONS, ADD NEW BUTTON THAT SAYS MARK INCOMPLETE, THEN WE SIMPLY FIND THE IN THE COMPLETED ARRAY, and push it to the main array
 // EVERY EVENT LISTENER CAN BE A APRT OF AN EVENT LISTENER OBJ WHERE WE PASS IT THE MAIN AND COMPLETE ARRAYS AND THEN WE JUST CALL THE OBJ FUNCTION IN HERE, INDEX.
 // EX: OBJ.UPCOMING WOULD STILL DO EVERYYTHING IT DOES HERE BUT NOW ITS NOTE HERE ATT ALL. THERE SHOULD BE NO ISSUES BECAUSE, IT STILL HAS ACCESS TO MAIN ARRAY.
-
-// note: this card function should create a card in the "closed state" and then when we click on an arrow lets sat, it will expand open revealing its contents
 
 // but if on completed page, then we would want it to only have a "mark as incomplete" button which would re-add it to the main array.
 // to do this, we can make a function which checks to see the parent of the card (which should be the page) and append the buttons accordingly.
