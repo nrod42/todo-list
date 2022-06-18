@@ -2,12 +2,11 @@ import todo from "./todo";
 import project from "./project";
 import task from "./task";
 import { projectBtns, render } from "./render";
-import createCard from "./card";
 import "./styles.css";
 
 const newTaskForm = document.getElementById("newTaskForm");
 const newProjectForm = document.getElementById("newProjectForm");
-const currentProject = document.querySelector(".currentProject");
+
 const inboxBtn = document.querySelector(".inboxBtn");
 const todayBtn = document.querySelector(".todayBtn");
 const upcomingBtn = document.querySelector(".upcomingBtn");
@@ -31,42 +30,19 @@ newTaskForm.addEventListener("submit", (e) => {
     newTaskForm.taskPriority.value.checked
   );
   todoList.getProject("Inbox").addTask(newTask);
+  render("Inbox", todoList.getProject("Inbox").getTasks());
 });
 
 inboxBtn.addEventListener("click", () => {
-  while (currentProject.firstChild) {
-    currentProject.firstChild.remove();
-  }
-  todoList
-    .getProject("Inbox")
-    .getTasks()
-    .forEach((task) => {
-      currentProject.appendChild(createCard(task));
-    });
+  render("Inbox", todoList.getProject("Inbox").getTasks());
 });
 
 todayBtn.addEventListener("click", () => {
-  while (currentProject.firstChild) {
-    currentProject.firstChild.remove();
-  }
-  todoList
-    .getProject("Inbox")
-    .getTodayTasks()
-    .forEach((task) => {
-      currentProject.appendChild(createCard(task));
-    });
+  render("Today's Tasks", todoList.getProject("Inbox").getTodayTasks());
 });
 
 upcomingBtn.addEventListener("click", () => {
-  while (currentProject.firstChild) {
-    currentProject.firstChild.remove();
-  }
-  todoList
-    .getProject("Inbox")
-    .getUpcomingTasks()
-    .forEach((task) => {
-      currentProject.appendChild(createCard(task));
-    });
+  render("This Week's Tasks", todoList.getProject("Inbox").getUpcomingTasks());
 });
 
 const allProjectBtns = Array.from(document.querySelectorAll(".projectBtn"));
