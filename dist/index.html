@@ -8,6 +8,62 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-    <div class="mainWrapper"></div>
+    <div class="mainWrapper">
+    <form action="" id="newTaskForm">
+        <label for="taskName">Task Title:</label>
+        <input type="text" id="taskName" name="taskName">
+
+        <label for="taskInfo">Description:</label>
+        <textarea id="taskInfo" name="taskInfo"></textarea>
+
+        <label for="taskDueDate">Due Date:</label>
+        <input type="date" id="taskDueDate" name="taskDueDate">
+
+        <div class="priorities">
+            <div>
+                <input type="radio" id="taskPriority" name="taskPriority" value="None" checked>
+                <label for="taskPriority">None</label>
+            </div>
+            <div>
+                <input type="radio" id="taskPriority" name="taskPriority" value="Low">
+                <label for="taskPriority">Low</label>
+            </div>
+            <div>
+                <input type="radio" id="taskPriority" name="taskPriority" value="Medium">
+                <label for="taskPriority">Medium</label>
+            </div>
+            <div>
+                <input type="radio" id="taskPriority" name="taskPriority" value="High">
+                <label for="taskPriority">High</label>
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+    <form action="" id="newProjectForm">
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="projectName" name="projectName">
+
+        <button type="submit">Submit</button>
+    </form>
+    <div class="nav">
+        <div class="logo">Logo</div>
+        <div class="profile">
+            <ul class="profileOptions">
+                <li>Settings</li>
+                <li>Notifications</li>
+                <li>Profile</li>
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar">
+        <button class="inbox">Inbox</button>
+        <button class="today">Today</button>
+        <button class="upcoming">Upcoming</button>
+        <button class="completed">Completed</button>
+    </div>
+    <div class="currentProject"></div>
+    <footer>By Nigel Rodriguez</footer>
+    </div>
 </body>
 </html>

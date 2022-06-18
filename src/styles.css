@@ -1,6 +1,7 @@
 * {
-    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -8,169 +9,99 @@
 
 }
 
-html {
-    height: 100vh;
-    width: 100vw;
-}
-
-body {
-    height: 100%;
+html, body {
     width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 .mainWrapper {
+    min-height: 100%;
     position: relative;
-    padding: 0 100px;
-    width: 100%;
-    height: 100%;  
     display: grid;
-    grid-template-columns: minmax(150px, 15%) 1fr;
-    grid-template-rows: 5% 1fr;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 10fr 0.5fr;
 }
 
 .nav {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black; 
+}
+
+.currentProject {
+    border: 1px solid black; 
+}
+
+footer {
     grid-column: span 2;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.nav div {
-    width: 50%;
-}
-
-.sidebar {
-    border: 1px solid black; 
-}
-
-.mainGroup, .projectGroup {   
-    margin: 10px;
-    padding: 10px;
+#newTaskForm {
     display: flex;
     flex-direction: column;
-}
-
-.mainGroup button, .projectGroup button {
-    margin: 10px 0;
-}
-
-.addTaskBtn {
     position: absolute;
-    right: 0;
-    top: 0;
-}
-
-#projectForm {
-    width: 250px;
-    height: 250px;
-    position: fixed;
-    margin: 0 auto;
-    left: calc(50% - 125px);
-    top: calc(50% - 125px);
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
-    display: none;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.priorities {
+    display: flex;
     flex-direction: column;
 }
 
-#taskForm, #editForm {
-    width: 370px;
-    height: 370px;
-    position: fixed;
-    margin: 0 auto;
-    left: calc(50% - 185px);
-    top: calc(50% - 185px);
+#newProjectForm {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: auto;
+    height: auto;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
-    display: none;
+    opacity: 1;
+    overflow: hidden;
     flex-direction: column;
     justify-content: space-between;
 }
 
-#addToProjectForm {
-    width: 250px;
-    height: 250px;
-    position: fixed;
-    margin: 0 auto;
-    left: calc(50% - 125px);
-    top: calc(50% - 125px);
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 2;
-}
 
-.project {
-    border: 1px solid black;
-    display: none;
-    flex-direction: column;
-}
-
-.inbox {
-    display: flex;
-}
-
-.today {
-    display: none;
-}
-
-.upcoming {
-    display: none;
-}
-
-.completed {
-    display: none;
-}
-
-.card {
-    position: relative;
-    margin: 10px;
-    padding: 10px;
-}
-
-.card p {
-    padding: 5px;
-}
-
-.lowPriority {
-    background-color: blue;
-}
-
-.medPriority {
-    background-color: gold;
-}
-
-.highPriority {
-    background-color: rgb(228, 54, 54);
-}
-
-.btnWrapper {
-    display: flex;
-    gap: 10px;
-}
-
-.collapsible {
-    color: white;
+.cardBtn {
+    color: black;
     cursor: pointer;
     padding: 18px;
     width: 100%;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.activeCard, .collapsible:hover {
+.activeCard, .cardBtn:hover {
     filter: brightness(85%);
 }
 
 .cardContent {
-    padding: 0 18px;
+    padding: 0 20px;
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -179,7 +110,11 @@ body {
     transition: max-height 0.2s ease-out;
 }
 
-.collapsible:after {
+.cardContent p {
+    padding: 5px 0;
+}
+
+.cardBtn:after {
     content: '\02795';
     font-size: 13px;
     color: white;
