@@ -6,7 +6,6 @@ import "./styles.css";
 
 const newTaskForm = document.getElementById("newTaskForm");
 const newProjectForm = document.getElementById("newProjectForm");
-
 const inboxBtn = document.querySelector(".inboxBtn");
 const todayBtn = document.querySelector(".todayBtn");
 const upcomingBtn = document.querySelector(".upcomingBtn");
@@ -33,17 +32,15 @@ newTaskForm.addEventListener("submit", (e) => {
   render("Inbox", todoList.getProject("Inbox").getTasks());
 });
 
-inboxBtn.addEventListener("click", () => {
-  render("Inbox", todoList.getProject("Inbox").getTasks());
-});
-
-todayBtn.addEventListener("click", () => {
-  render("Today's Tasks", todoList.getProject("Inbox").getTodayTasks());
-});
-
-upcomingBtn.addEventListener("click", () => {
-  render("This Week's Tasks", todoList.getProject("Inbox").getUpcomingTasks());
-});
+inboxBtn.addEventListener("click", () =>
+  render("Inbox", todoList.getProject("Inbox").getTasks())
+);
+todayBtn.addEventListener("click", () =>
+  render("Today's Tasks", todoList.getProject("Inbox").getTodayTasks())
+);
+upcomingBtn.addEventListener("click", () =>
+  render("This Week's Tasks", todoList.getProject("Inbox").getUpcomingTasks())
+);
 
 const allProjectBtns = Array.from(document.querySelectorAll(".projectBtn"));
 allProjectBtns.forEach((button) => {

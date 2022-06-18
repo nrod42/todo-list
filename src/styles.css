@@ -85,6 +85,7 @@ footer {
 
 
 .cardBtn {
+    background-color: #bbb;
     color: black;
     cursor: pointer;
     padding: 18px;
@@ -98,6 +99,25 @@ footer {
 
 .activeCard, .cardBtn:hover {
     filter: brightness(85%);
+}
+
+.cardBtnContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardBtnContentLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardBtnContentLeft h3 {
+    padding-right: 10px;
+}
+
+.cardBtnContentLeft p {
+    font-size: 1rem;
 }
 
 .cardContent {
@@ -120,6 +140,7 @@ footer {
     color: white;
     float: right;
     margin-left: 5px;
+    filter: brightness(85%);
 }
 
 .activeCard:after {
