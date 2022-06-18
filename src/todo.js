@@ -1,27 +1,31 @@
 import project from "./project";
 import task from "./task";
 
-const todo = () => {
-    return {
-        projects: [project('Inbox'), project('Today'), project('Upcoming')],
-        
-        setProjects (project) {
-            this.projects  = project;
-        },
+const todo = () => ({
+  projects: [project("Inbox")],
 
-        getProjects () {
-            return this.projects;
-        },
+  setProjects(project) {
+    this.projects = project;
+  },
 
-        getProject (projectName) {
-            return this.projects.find((project) => project.getName() === projectName)
-        },
+  getProjects() {
+    return this.projects;
+  },
 
-        addProject (newProject) {
-            if (this.projects.find((project) => project.getName() === newProject.getName())) return;
-            this.projects.push(newProject);
-        }
+  getProject(projectName) {
+    return this.projects.find((project) => project.getName() === projectName);
+  },
+
+  addProject(newProject) {
+    if (
+      this.projects.find(
+        (project) => project.getName() === newProject.getName()
+      )
+    ) {
+      return;
     }
-}
+    this.projects.push(newProject);
+  },
+});
 
 export default todo;

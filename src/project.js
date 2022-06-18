@@ -1,42 +1,46 @@
+const project = (name) => ({
+  name,
+  tasks: [],
 
-const project =  (name) => {
-  return {
-    name,
-    tasks: [],
-
-    setName (name) {
+  setName(name) {
     this.name = name;
-    },
+  },
 
-    getName () {
+  getName() {
     return this.name;
-    },
+  },
 
-    setTasks (tasks) {
+  setTasks(tasks) {
     this.tasks = info;
-    },
+  },
 
-    getTasks () {
+  getTasks() {
     return this.tasks;
-    },
+  },
 
-    addTask (newTask) {
-    if (this.tasks.find((task) => task.getName() === newTask.name)) return
-    this.tasks.push(newTask)
-    },
+  addTask(newTask) {
+    if (this.tasks.find((task) => task.getName() === newTask.name)) return;
+    this.tasks.push(newTask);
+  },
 
-    delTask (taskName) {
-    this.tasks = this.tasks.filter((task) => task.getName() !== taskName)
-    },
+  delTask(taskName) {
+    this.tasks = this.tasks.filter((task) => task.getName() !== taskName);
+  },
 
-    getTodayTasks () {
-    return this.tasks.filter((task) => task.getDueDate() === new Date())
-    },
+  getTodayTasks() {
+    let currentDate = new Date();
+    const dd = String(currentDate.getDate()).padStart(2, "0");
+    const mm = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const yyyy = currentDate.getFullYear();
+    currentDate = `${yyyy}-${mm}-${dd}`;
+    return this.tasks.filter((task) => task.getDate() === currentDate);
+  },
 
-    getUpcomingTasks () {
-
-    }
-  };
-};
+  getUpcomingTasks() {
+    return this.tasks.sort(
+      (a, b) => new Date(a.getDate()) - new Date(b.getDate())
+    );
+  },
+});
 
 export default project;
