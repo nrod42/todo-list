@@ -1,9 +1,8 @@
-const createCard = (task) => {
+const createCard = (project, task) => {
   const card = document.createElement("div");
   const cardBtn = document.createElement("div");
   const cardBtnContent = document.createElement("div");
-  const cardBtnContentLeft = document.createElement("div");
-  const cardBtnContentRight = document.createElement("div");
+  const cardActionBtns = document.createElement("div");
   const cardContent = document.createElement("div");
   const taskName = document.createElement("h3");
   const taskInfo = document.createElement("p");
@@ -12,40 +11,37 @@ const createCard = (task) => {
   const editBtn = document.createElement("button");
   const delBtn = document.createElement("button");
   const addToProjectBtn = document.createElement("button");
+  const selectProjectForm = document.getElementById("selectProjectForm");
 
   card.classList.add("card");
   cardBtn.classList.add("cardBtn");
   cardBtnContent.classList.add("cardBtnContent");
-  cardBtnContentLeft.classList.add("cardBtnContentLeft");
-  cardBtnContentRight.classList.add("cardBtnContentRight");
+  cardActionBtns.classList.add("cardActionBtns");
   cardContent.classList.add("cardContent");
 
   taskName.textContent = task.getName();
   taskDueDate.textContent = task.getDate();
   taskInfo.textContent = task.getInfo();
-  completeBtn.textContent = "Complete";
   editBtn.textContent = "Edit";
   delBtn.textContent = "Delete";
   addToProjectBtn.textContent = "Add To Project";
+  completeBtn.textContent = "Complete";
 
   // Left Side of Card Button Content
-  cardBtnContentLeft.appendChild(taskName);
-  cardBtnContentLeft.appendChild(taskDueDate);
+  cardBtnContent.appendChild(taskName);
+  cardBtnContent.appendChild(taskDueDate);
 
   // Right Side of Card Button Content
-  cardBtnContentRight.appendChild(completeBtn);
-  cardBtnContentRight.appendChild(editBtn);
-  cardBtnContentRight.appendChild(delBtn);
-  cardBtnContentRight.appendChild(addToProjectBtn);
-
-  // Whole Card Button Content
-  cardBtnContent.appendChild(cardBtnContentLeft);
-  cardBtnContent.appendChild(cardBtnContentRight);
+  cardActionBtns.appendChild(completeBtn);
+  cardActionBtns.appendChild(editBtn);
+  cardActionBtns.appendChild(delBtn);
+  cardActionBtns.appendChild(addToProjectBtn);
 
   cardBtn.appendChild(cardBtnContent);
   cardContent.appendChild(taskInfo);
   card.appendChild(cardBtn);
   card.appendChild(cardContent);
+  card.appendChild(cardActionBtns);
 
   // Collapsible Card Logic
   cardBtn.addEventListener("click", () => {
@@ -60,7 +56,19 @@ const createCard = (task) => {
     }
   });
 
-  editBtn.addEventListener("click", () => {});
+  delBtn.addEventListener("click", () => {
+    project.delTask(task.getName());
+  });
+
+  addToProjectBtn.addEventListener("click", () => {
+    // should show the form
+    selectProjectForm.style.display = "flex";
+    card.appendChild(selectProjectForm);
+  });
+
+  completeBtn.addEventListener("click", () => {
+    task.switchStatus();
+  });
 
   return card;
 };

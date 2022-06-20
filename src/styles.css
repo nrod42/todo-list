@@ -67,11 +67,28 @@ footer {
 }
 
 #newProjectForm {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    position: absolute;
     top: 30%;
     left: 50%;
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 1;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#selectProjectForm {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    top: 30%;
+    left: 80%;
     width: auto;
     height: auto;
     border: 1px solid black;
@@ -88,13 +105,16 @@ footer {
     background-color: #bbb;
     color: black;
     cursor: pointer;
-    padding: 18px;
     width: 100%;
+    padding: 10px;
     border: none;
     text-align: left;
     outline: none;
     font-size: 20px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .activeCard, .cardBtn:hover {
@@ -103,20 +123,15 @@ footer {
 
 .cardBtnContent {
     display: flex;
-    justify-content: space-between;
-}
-
-.cardBtnContentLeft {
-    display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
-.cardBtnContentLeft h3 {
+.cardBtnContent h3 {
     padding-right: 10px;
 }
 
-.cardBtnContentLeft p {
+.cardBtnContent p {
     font-size: 1rem;
 }
 
@@ -132,6 +147,10 @@ footer {
 
 .cardContent p {
     padding: 5px 0;
+}
+
+.cardActionBtns {
+    position: absolute;
 }
 
 .cardBtn:after {

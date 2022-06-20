@@ -3,6 +3,7 @@ const task = (name, info, dueDate, priority) => ({
   info,
   dueDate,
   priority,
+  status: "incomplete",
 
   setName(name) {
     this.name = name;
@@ -34,6 +35,16 @@ const task = (name, info, dueDate, priority) => ({
 
   getPriority() {
     return this.priority;
+  },
+
+  switchStatus() {
+    this.status === "incomplete"
+      ? (this.status = "complete")
+      : (this.status = "incomplete");
+  },
+
+  getStatus() {
+    return this.status;
   },
 });
 

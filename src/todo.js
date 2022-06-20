@@ -1,5 +1,4 @@
 import project from "./project";
-import task from "./task";
 
 const todo = () => ({
   projects: [project("Inbox")],

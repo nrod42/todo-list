@@ -1,3 +1,5 @@
+import formatCurrentDate from "./formatCurrentDate";
+
 const project = (name) => ({
   name,
   tasks: [],
@@ -11,11 +13,14 @@ const project = (name) => ({
   },
 
   setTasks(tasks) {
-    this.tasks = info;
+    this.tasks = tasks;
   },
 
   getTasks() {
-    return this.tasks;
+    const incompletedTasks = this.tasks.filter(
+      (task) => task.getStatus() === "incomplete"
+    );
+    return incompletedTasks;
   },
 
   addTask(newTask) {
@@ -28,18 +33,24 @@ const project = (name) => ({
   },
 
   getTodayTasks() {
-    let currentDate = new Date();
-    const dd = String(currentDate.getDate()).padStart(2, "0");
-    const mm = String(currentDate.getMonth() + 1).padStart(2, "0");
-    const yyyy = currentDate.getFullYear();
-    currentDate = `${yyyy}-${mm}-${dd}`;
-    return this.tasks.filter((task) => task.getDate() === currentDate);
+    const currentDate = formatCurrentDate();
+    const incompletedTasks = this.tasks.filter(
+      (task) => task.getStatus() === "incomplete"
+    );
+    return incompletedTasks.filter((task) => task.getDate() === currentDate);
   },
 
   getUpcomingTasks() {
-    return this.tasks.sort(
+    const incompletedTasks = this.tasks.filter(
+      (task) => task.getStatus() === "incomplete"
+    );
+    return incompletedTasks.sort(
       (a, b) => new Date(a.getDate()) - new Date(b.getDate())
     );
+  },
+
+  getCompletedTasks() {
+    return this.tasks.filter((task) => task.getStatus() !== "incomplete");
   },
 });
 
