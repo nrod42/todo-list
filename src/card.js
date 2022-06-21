@@ -1,3 +1,9 @@
+import { render } from "./render";
+import completeIcon from './img/completed_icon.svg';
+import editIcon from './img/edit_icon.svg';
+import delIcon from './img/delete_icon.svg';
+import addToProjectIcon from './img/addToProject_icon.svg'
+
 const createCard = (project, task) => {
   const card = document.createElement("div");
   const cardBtn = document.createElement("div");
@@ -7,10 +13,14 @@ const createCard = (project, task) => {
   const taskName = document.createElement("h3");
   const taskInfo = document.createElement("p");
   const taskDueDate = document.createElement("p");
-  const completeBtn = document.createElement("button");
-  const editBtn = document.createElement("button");
-  const delBtn = document.createElement("button");
-  const addToProjectBtn = document.createElement("button");
+  const completeBtn = new Image();
+  completeBtn.src = completeIcon;
+  const editBtn = new Image();  
+  editBtn.src = editIcon;
+  const delBtn = new Image();
+  delBtn.src = delIcon;
+  const addToProjectBtn = new Image();
+  addToProjectBtn.src = addToProjectIcon;
   const selectProjectForm = document.getElementById("selectProjectForm");
 
   card.classList.add("card");
@@ -18,6 +28,10 @@ const createCard = (project, task) => {
   cardBtnContent.classList.add("cardBtnContent");
   cardActionBtns.classList.add("cardActionBtns");
   cardContent.classList.add("cardContent");
+  completeBtn.classList.add('actionBtn')
+  editBtn.classList.add('actionBtn')
+  delBtn.classList.add('actionBtn')
+  addToProjectBtn.classList.add('actionBtn')
 
   taskName.textContent = task.getName();
   taskDueDate.textContent = task.getDate();
@@ -41,7 +55,7 @@ const createCard = (project, task) => {
   cardContent.appendChild(taskInfo);
   card.appendChild(cardBtn);
   card.appendChild(cardContent);
-  card.appendChild(cardActionBtns);
+  cardBtnContent.appendChild(cardActionBtns);
 
   // Collapsible Card Logic
   cardBtn.addEventListener("click", () => {
@@ -56,22 +70,24 @@ const createCard = (project, task) => {
     }
   });
 
+  // Gives each card styling based on priority level
   switch (task.getPriority()) {
     case "High":
-      cardBtn.style.backgroundColor = "red";
+      cardBtn.classList.add('highPriority');
       break;
     case "Medium":
-      cardBtn.style.backgroundColor = "gold";
+      cardBtn.classList.add('mediumPriority');
       break;
     case "Low":
-      cardBtn.style.backgroundColor = "blue";
+      cardBtn.classList.add('lowPriority');
       break;
     default:
-      cardBtn.style.backgroundColor = "#bbb";
+      cardBtn.classList.add('nonePriority');
   }
 
   delBtn.addEventListener("click", () => {
     project.delTask(task.getName());
+    render('Inbox', project, project.getTasks()); //causing error since i think render is expecting something else. Also, name should be inbox always
   });
 
   addToProjectBtn.addEventListener("click", () => {
@@ -82,6 +98,7 @@ const createCard = (project, task) => {
 
   completeBtn.addEventListener("click", () => {
     task.switchStatus();
+    render('Inbox', project, project.getTasks()) //****Name should should not be inbox. it should be the name of the project
   });
 
   return card;

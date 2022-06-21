@@ -6,7 +6,7 @@ const projectBtn = (newProject) => {
   newProjectBtn.textContent = newProject.getName();
 
   return newProjectBtn;
-};
+};  
 
 // Generates tab page
 const render = (name, project, tasks) => {
@@ -20,7 +20,7 @@ const render = (name, project, tasks) => {
   // the page depending on what current page is displayed
   // If we're on todays tasks screen and we add a new task thats due today,
   // it should refresh immidiately
-
+  
   const heading = document.createElement("h1");
   heading.textContent = name;
   currentProject.appendChild(heading);

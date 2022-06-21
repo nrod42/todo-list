@@ -32,6 +32,7 @@ render(
 
 newTaskBtn.addEventListener("click", () => {
   newTaskForm.style.opacity = "1";
+  newTaskForm.style.visibility = 'visible';
 });
 
 newTaskForm.addEventListener("submit", (e) => {
@@ -49,10 +50,12 @@ newTaskForm.addEventListener("submit", (e) => {
     todoList.getProject("Inbox").getTasks()
   );
   newTaskForm.style.opacity = "0";
+  newTaskForm.style.visibility = 'hidden';
 });
 
 newProjectBtn.addEventListener("click", () => {
   newProjectForm.style.opacity = "1";
+  newProjectForm.style.visibility = 'visible';
 });
 
 newProjectForm.addEventListener("submit", (e) => {
@@ -62,7 +65,7 @@ newProjectForm.addEventListener("submit", (e) => {
   todoList.addProject(newProject);
   const newProjectBtn = projectBtn(newProject);
   newProjectBtn.addEventListener("click", () => {
-    render(name, todoList.getProject(name), todoList.getProject(name).getTasks);
+    render(name, todoList.getProject(name), todoList.getProject(name).getTasks());
   });
   const projectOption = document.createElement("option");
   projectOption.textContent = name;
@@ -70,14 +73,15 @@ newProjectForm.addEventListener("submit", (e) => {
   selectProjectForm.querySelector("select").appendChild(projectOption);
 
   newProjectForm.style.opacity = "0";
+  newProjectForm.style.visibility = 'hidden';
 });
 
-selectProjectForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  // find that task name in project
-  console.log(todoList.getProject(selectProjectForm.projectList.value));
-  todoList.getProject(selectProjectForm.projectList.value).addTask(task);
-});
+// selectProjectForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   // find that task name in project
+//   console.log(todoList.getProject(selectProjectForm.projectList.value));
+//   todoList.getProject(selectProjectForm.projectList.value).addTask(task);
+// });
 
 inboxBtn.addEventListener("click", () =>
   render(
@@ -106,8 +110,10 @@ completedBtn.addEventListener("click", () => {
     todoList.getProject("Inbox"),
     todoList.getProject("Inbox").getCompletedTasks()
   );
+  const completeBtn = document.querySelector(".currentProject button");
+  //if (completeBtn) completeBtn.textContent = 'Mark As Incomplete'
   const allBtns = Array.from(
-    document.querySelectorAll(".currentProject button:not(:first-child)")
+    document.querySelectorAll(".currentProject img:not(:first-child)")
   );
   allBtns.forEach((btn) => btn.remove());
 });
