@@ -56,6 +56,20 @@ const createCard = (project, task) => {
     }
   });
 
+  switch (task.getPriority()) {
+    case "High":
+      cardBtn.style.backgroundColor = "red";
+      break;
+    case "Medium":
+      cardBtn.style.backgroundColor = "gold";
+      break;
+    case "Low":
+      cardBtn.style.backgroundColor = "blue";
+      break;
+    default:
+      cardBtn.style.backgroundColor = "#bbb";
+  }
+
   delBtn.addEventListener("click", () => {
     project.delTask(task.getName());
   });

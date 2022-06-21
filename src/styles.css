@@ -19,24 +19,53 @@ html, body {
     min-height: 100%;
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 10fr 0.5fr;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 3% 1fr 3%;
 }
 
 .nav {
+    border: 1px solid black;
     grid-column: span 2;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav ul {
+    list-style-type: none;
+}
+
+.nav li {
+    display: inline;
 }
 
 .sidebar {
     display: flex;
     flex-direction: column;
-    border: 1px solid black; 
+}
+
+.sidebarProjectTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+
+.sidebarBtns, .sidebarProjectBtns{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.sidebarBtns  button, .sidebarProjectBtns button {
+    margin: 10px;
+    padding: 10px;
 }
 
 .currentProject {
-    border: 1px solid black; 
+    border: 1px solid black;
+    padding: 10px;
 }
 
 footer {
@@ -47,9 +76,9 @@ footer {
 }
 
 #newTaskForm {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    position: absolute;
     top: 50%;
     left: 50%;
     width: auto;
@@ -57,8 +86,9 @@ footer {
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
-    opacity: 1;
+    opacity: 0;
     overflow: hidden;
+    transition: opacity 0.2s ease-in;
 }
 
 .priorities {
@@ -70,7 +100,25 @@ footer {
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 30%;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 0;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity 0.2s ease-in;
+}
+
+#selectProjectForm {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    top: 50%;
     left: 50%;
     width: auto;
     height: auto;
@@ -83,23 +131,9 @@ footer {
     justify-content: space-between;
 }
 
-#selectProjectForm {
-    position: absolute;
-    display: none;
-    flex-direction: column;
-    top: 30%;
-    left: 80%;
-    width: auto;
-    height: auto;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    opacity: 1;
-    overflow: hidden;
-    flex-direction: column;
-    justify-content: space-between;
+.card {
+    position: relative;
 }
-
 
 .cardBtn {
     background-color: #bbb;
@@ -151,17 +185,20 @@ footer {
 
 .cardActionBtns {
     position: absolute;
+    top: 30%;
+    right: 30px;
 }
 
 .cardBtn:after {
     content: '\02795';
     font-size: 13px;
-    color: white;
+    color: black;
     float: right;
     margin-left: 5px;
     filter: brightness(85%);
 }
 
 .activeCard:after {
-    content: "\2796"; 
+    content: "\2796";
+    color: black;
 }

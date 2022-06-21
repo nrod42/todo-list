@@ -6,13 +6,15 @@ import formatCurrentDate from "./formatCurrentDate";
 import "./styles.css";
 
 const newTaskForm = document.getElementById("newTaskForm");
+const newTaskBtn = document.querySelector(".newTaskBtn");
 const newProjectForm = document.getElementById("newProjectForm");
+const newProjectBtn = document.querySelector(".newProjectBtn");
 const selectProjectForm = document.getElementById("selectProjectForm");
 const inboxBtn = document.querySelector(".inboxBtn");
 const todayBtn = document.querySelector(".todayBtn");
 const upcomingBtn = document.querySelector(".upcomingBtn");
 const completedBtn = document.querySelector(".completedBtn");
-const sidebar = document.querySelector(".sidebar");
+const sidebarProjectBtns = document.querySelector(".sidebarProjectBtns");
 
 const todoList = todo();
 
@@ -28,6 +30,31 @@ render(
   todoList.getProject("Inbox").getTasks()
 );
 
+newTaskBtn.addEventListener("click", () => {
+  newTaskForm.style.opacity = "1";
+});
+
+newTaskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const newTask = task(
+    newTaskForm.taskName.value,
+    newTaskForm.taskInfo.value,
+    newTaskForm.taskDueDate.value,
+    newTaskForm.taskPriority.value
+  );
+  todoList.getProject("Inbox").addTask(newTask);
+  render(
+    "Inbox",
+    todoList.getProject("Inbox"),
+    todoList.getProject("Inbox").getTasks()
+  );
+  newTaskForm.style.opacity = "0";
+});
+
+newProjectBtn.addEventListener("click", () => {
+  newProjectForm.style.opacity = "1";
+});
+
 newProjectForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const name = newProjectForm.projectName.value;
@@ -39,24 +66,10 @@ newProjectForm.addEventListener("submit", (e) => {
   });
   const projectOption = document.createElement("option");
   projectOption.textContent = name;
-  sidebar.appendChild(newProjectBtn);
+  sidebarProjectBtns.appendChild(newProjectBtn);
   selectProjectForm.querySelector("select").appendChild(projectOption);
-});
 
-newTaskForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const newTask = task(
-    newTaskForm.taskName.value,
-    newTaskForm.taskInfo.value,
-    newTaskForm.taskDueDate.value,
-    newTaskForm.taskPriority.value.checked
-  );
-  todoList.getProject("Inbox").addTask(newTask);
-  render(
-    "Inbox",
-    todoList.getProject("Inbox"),
-    todoList.getProject("Inbox").getTasks()
-  );
+  newProjectForm.style.opacity = "0";
 });
 
 selectProjectForm.addEventListener("submit", (e) => {
