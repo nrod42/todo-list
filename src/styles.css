@@ -90,7 +90,7 @@ html, body {
     filter: brightness(85%);
 }
 
-.sidebarHomeTitle, .sidebarProjectTitle {
+.sidebarTaskTitle, .sidebarProjectTitle {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -98,12 +98,13 @@ html, body {
 }
 
 .sidebar h3 {
-    margin: 5px 0;
+    padding-left: 10px;
 }
 
 .newTaskBtn, .newProjectBtn {
     cursor: pointer;
-    background-color: royalblue;
+    width: calc(--icon-width * 1.2);
+    height: auto;
     border: none;
     color: white;
     padding: 5px;
