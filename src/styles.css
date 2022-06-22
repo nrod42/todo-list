@@ -1,8 +1,13 @@
+@font-face {
+    font-family: 'Ubuntu-font';
+    src: url('./fonts/Ubuntu-Regular.ttf') format('truetype');
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Ubuntu-font', Arial, Helvetica, sans-serif;
 }
 
 :root {
@@ -23,13 +28,6 @@ html, body {
     grid-template-rows: auto 1fr auto;
 }
 
-.icons {
-    width: var(--icon-width);
-    height: auto;
-    cursor: pointer;
-    margin: 0 5px;
-}
-
 .nav {
     margin: 5px;
     grid-column: span 2;
@@ -39,17 +37,35 @@ html, body {
     justify-content: space-between;
 }
 
+.nav ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav li {
+    display: inline;
+}
+
 .logo {
     display: flex;
     align-items: center;
 }
 
-.nav ul {
-    list-style-type: none;
+.icons {
+    width: var(--icon-width);
+    height: auto;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: transform 0.2s ease;
 }
 
-.nav li {
-    display: inline;
+.icons:active {
+    transform: scaleX(1.5) scaleY(1.5);
+}
+
+.profileIcon {
+    width: 45px;
 }
 
 .sidebar {
@@ -214,7 +230,7 @@ footer {
 }
 
 .cardContent p {
-    padding: 5px 0;
+    padding: 15px 0;
 }
 
 .cardBtn:after {
@@ -235,6 +251,11 @@ footer {
     height: auto;
     cursor: pointer;
     margin: 0 5px;
+    transition: transform 0.2s ease;
+}
+
+.actionBtn:active {
+    transform: scaleX(1.5) scaleY(1.5);
 }
 
 .highPriority {
