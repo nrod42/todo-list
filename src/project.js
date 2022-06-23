@@ -2,6 +2,7 @@ import formatCurrentDate from "./formatCurrentDate";
 
 const project = (name) => ({
   name,
+  id: Math.floor(Math.random() * 200) + 1,
   tasks: [],
 
   setName(name) {
@@ -10,6 +11,10 @@ const project = (name) => ({
 
   getName() {
     return this.name;
+  },
+
+  getId() {
+    return this.id;
   },
 
   setTasks(tasks) {
@@ -21,6 +26,10 @@ const project = (name) => ({
       (task) => task.getStatus() === "incomplete"
     );
     return incompletedTasks;
+  },
+
+  getTask(taskName) {
+    return this.tasks.find((task) => task.getName() === taskName);
   },
 
   addTask(newTask) {

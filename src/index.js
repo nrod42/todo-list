@@ -9,12 +9,14 @@ const newTaskForm = document.getElementById("newTaskForm");
 const newTaskBtn = document.querySelector(".newTaskBtn");
 const newProjectForm = document.getElementById("newProjectForm");
 const newProjectBtn = document.querySelector(".newProjectBtn");
+const editTaskForm = document.getElementById("editTaskForm");
 const selectProjectForm = document.getElementById("selectProjectForm");
 const inboxBtn = document.querySelector(".inboxBtn");
 const todayBtn = document.querySelector(".todayBtn");
 const upcomingBtn = document.querySelector(".upcomingBtn");
 const completedBtn = document.querySelector(".completedBtn");
 const sidebarProjectBtns = document.querySelector(".sidebarProjectBtns");
+const currentProject = document.querySelector(".currentProject");
 
 const todoList = todo();
 
@@ -43,14 +45,17 @@ newTaskForm.addEventListener("submit", (e) => {
     newTaskForm.taskDueDate.value,
     newTaskForm.taskPriority.value
   );
+
   todoList.getProject("Inbox").addTask(newTask);
   render(
     "Inbox",
     todoList.getProject("Inbox"),
     todoList.getProject("Inbox").getTasks()
   );
+
   newTaskForm.style.opacity = "0";
   newTaskForm.style.visibility = "hidden";
+  newTaskForm.reset();
 });
 
 newProjectBtn.addEventListener("click", () => {
@@ -71,21 +76,18 @@ newProjectForm.addEventListener("submit", (e) => {
       todoList.getProject(name).getTasks()
     );
   });
+
+  // Adds new projects to the add to project form
   const projectOption = document.createElement("option");
   projectOption.textContent = name;
-  sidebarProjectBtns.appendChild(newProjectBtn);
   selectProjectForm.querySelector("select").appendChild(projectOption);
 
+  sidebarProjectBtns.appendChild(newProjectBtn);
+
+  newProjectForm.reset();
   newProjectForm.style.opacity = "0";
   newProjectForm.style.visibility = "hidden";
 });
-
-// selectProjectForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   // find that task name in project
-//   console.log(todoList.getProject(selectProjectForm.projectList.value));
-//   todoList.getProject(selectProjectForm.projectList.value).addTask(task);
-// });
 
 inboxBtn.addEventListener("click", () =>
   render(
@@ -120,4 +122,50 @@ completedBtn.addEventListener("click", () => {
     document.querySelectorAll(".currentProject img:not(:first-child)")
   );
   allBtns.forEach((btn) => btn.remove());
+});
+
+editTaskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const activeProject = todoList
+    .getProjects()
+    .find(
+      (project) => project.getId() == currentProject.getAttribute("data-id")
+    );
+  const editTaskFormId = editTaskForm.getAttribute("data-id");
+
+  const editedTask = activeProject
+    .getTasks()
+    .find((task) => task.getId() == editTaskFormId);
+
+  editedTask.setName(editTaskForm.taskName.value);
+  editedTask.setInfo(editTaskForm.taskInfo.value);
+  editedTask.setDate(editTaskForm.taskDueDate.value);
+  editedTask.setPriority(editTaskForm.taskPriority.value);
+
+  editTaskForm.style.opacity = "0";
+  editTaskForm.style.visibility = "hidden";
+  render(activeProject.getName(), activeProject, activeProject.getTasks());
+});
+
+selectProjectForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const activeProject = todoList
+    .getProjects()
+    .find(
+      (project) => project.getId() == currentProject.getAttribute("data-id")
+    );
+  const selectProjectFormId = selectProjectForm.getAttribute("data-id");
+  const selectedTask = activeProject
+    .getTasks()
+    .find((task) => task.getId() == selectProjectFormId);
+
+  todoList
+    .getProject(selectProjectForm.projectList.value)
+    .addTask(selectedTask);
+
+  todoList.getProject(activeProject.getName()).delTask(selectedTask.getName());
+
+  selectProjectForm.style.opacity = "0";
+  selectProjectForm.style.visibility = "hidden";
+  render(activeProject.getName(), activeProject, activeProject.getTasks());
 });

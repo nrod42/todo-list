@@ -4,6 +4,7 @@ const task = (name, info, dueDate, priority) => ({
   dueDate,
   priority,
   status: "incomplete",
+  id: Math.floor(Math.random() * 100) + 1,
 
   setName(name) {
     this.name = name;
@@ -37,14 +38,18 @@ const task = (name, info, dueDate, priority) => ({
     return this.priority;
   },
 
-  switchStatus() {
-    this.status === "incomplete"
-      ? (this.status = "complete")
-      : (this.status = "incomplete");
+  getId() {
+    return this.id;
   },
 
   getStatus() {
     return this.status;
+  },
+
+  switchStatus() {
+    this.status === "incomplete"
+      ? (this.status = "complete")
+      : (this.status = "incomplete");
   },
 });
 

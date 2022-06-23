@@ -122,7 +122,7 @@ footer {
     justify-content: center;
 }
 
-#newTaskForm {
+#newTaskForm, #editTaskForm, #newProjectForm, #selectProjectForm {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -142,42 +142,6 @@ footer {
 .priorities {
     display: flex;
     flex-direction: column;
-}
-
-#newProjectForm {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    opacity: 0;
-    visibility: hidden;
-    overflow: hidden;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: opacity 0.2s ease-in;
-}
-
-#selectProjectForm {
-    position: absolute;
-    display: none;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    opacity: 1;
-    overflow: hidden;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .cardBtn {
