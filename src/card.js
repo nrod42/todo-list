@@ -100,7 +100,7 @@ const createCard = (project, task) => {
 
   completeBtn.addEventListener('click', () => {
     task.switchStatus();
-    render('Inbox', project, project.getTasks()); //* ***Name should should not be inbox. it should be the name of the project
+    render(project.getName(), project, project.getTasks()); //* ***Name should should not be inbox. it should be the name of the project
   });
 
   editBtn.addEventListener('click', () => {

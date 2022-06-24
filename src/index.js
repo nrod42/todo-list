@@ -93,11 +93,11 @@ upcomingBtn.addEventListener('click', () =>
   ),
 );
 completedBtn.addEventListener('click', () => {
-  render(
-    'Completed',
-    todoList.getProject('Inbox'),
-    todoList.getProject('Inbox').getCompletedTasks(),
-  );
+  let allCompletedTasks = [];
+  todoList.getProjects().forEach((project) => {
+    allCompletedTasks = allCompletedTasks.concat(project.getCompletedTasks());
+  });
+  render('Completed', todoList.getProject('Inbox'), allCompletedTasks);
   // const completeBtn = document.querySelector('.currentProject button');
   // // if (completeBtn) completeBtn.textContent = 'Mark As Incomplete'
   const allBtns = Array.from(document.querySelectorAll('.currentProject img:not(:first-child)'));
