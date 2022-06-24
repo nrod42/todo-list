@@ -89,11 +89,10 @@ const createCard = (project, task) => {
 
   delBtn.addEventListener('click', () => {
     project.delTask(task.getName());
-    render('Inbox', project, project.getTasks()); // causing error since i think render is expecting something else. Also, name should be inbox always
+    render(project.getName(), project, project.getTasks()); //* ***Name should should not be inbox. it should be the name of the project
   });
 
   addToProjectBtn.addEventListener('click', () => {
-    // should show the form
     selectProjectForm.style.opacity = '1';
     selectProjectForm.style.visibility = 'visible';
     selectProjectForm.setAttribute('data-id', card.getAttribute('data-id'));
