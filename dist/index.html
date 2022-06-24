@@ -9,79 +9,78 @@
 </head>
 <body>
     <div class="mainWrapper">
-    <form action="" id="newTaskForm">
-        <label for="taskName">Task Title:</label>
-        <input type="text" id="taskName" name="taskName">
-
-        <label for="taskInfo">Description:</label>
-        <textarea id="taskInfo" name="taskInfo"></textarea>
-
-        <label for="taskDueDate">Due Date (Optional):</label>
-        <input type="date" id="taskDueDate" name="taskDueDate">
-
-        <div class="priorities">
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="None" checked>
-                <label for="taskPriority">None</label>
+    <div class="newTaskFormWrapper">
+        <form action="" id="newTaskForm">
+            <label for="taskName">Task Title:</label>
+            <input type="text" id="taskName" name="taskName">
+            <label for="taskInfo">Description:</label>
+            <textarea id="taskInfo" name="taskInfo"></textarea>
+            <label for="taskDueDate">Due Date (Optional):</label>
+            <input type="date" id="taskDueDate" name="taskDueDate">
+            <div class="priorities">
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="None" checked>
+                    <label for="taskPriority">None</label>
+                </div>
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="Low">
+                    <label for="taskPriority">Low</label>
+                </div>
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="Medium">
+                    <label for="taskPriority">Medium</label>
+                </div>
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="High">
+                    <label for="taskPriority">High</label>
+                </div>
             </div>
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="Low">
-                <label for="taskPriority">Low</label>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="editTaskFormWrapper">
+        <form action="" id="editTaskForm">
+            <label for="taskName">Task Title:</label>
+            <input type="text" id="taskName" name="taskName">
+            <label for="taskInfo">Description:</label>
+            <textarea id="taskInfo" name="taskInfo"></textarea>
+            <label for="taskDueDate">Due Date (Optional):</label>
+            <input type="date" id="taskDueDate" name="taskDueDate">
+            <div class="priorities">
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="None" checked>
+                    <label for="taskPriority">None</label>
+                </div>
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="Low">
+                    <label for="taskPriority">Low</label>
+                </div>
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="Medium">
+                    <label for="taskPriority">Medium</label>
+                </div>
+                <div>
+                    <input type="radio" id="taskPriority" name="taskPriority" value="High">
+                    <label for="taskPriority">High</label>
+                </div>
             </div>
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="Medium">
-                <label for="taskPriority">Medium</label>
-            </div>
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="High">
-                <label for="taskPriority">High</label>
-            </div>
-        </div>
-
-        <button type="submit">Submit</button>
-    </form>
-    <form action="" id="editTaskForm">
-        <label for="taskName">Task Title:</label>
-        <input type="text" id="taskName" name="taskName">
-
-        <label for="taskInfo">Description:</label>
-        <textarea id="taskInfo" name="taskInfo"></textarea>
-
-        <label for="taskDueDate">Due Date (Optional):</label>
-        <input type="date" id="taskDueDate" name="taskDueDate">
-
-        <div class="priorities">
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="None" checked>
-                <label for="taskPriority">None</label>
-            </div>
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="Low">
-                <label for="taskPriority">Low</label>
-            </div>
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="Medium">
-                <label for="taskPriority">Medium</label>
-            </div>
-            <div>
-                <input type="radio" id="taskPriority" name="taskPriority" value="High">
-                <label for="taskPriority">High</label>
-            </div>
-        </div>
-
-        <button type="submit">Submit</button>
-    </form>
-    <form action="" id="newProjectForm">
-        <label for="projectName">Project Name:</label>
-        <input type="text" id="projectName" name="projectName">
-
-        <button type="submit">Submit</button>
-    </form>
-    <form action="" id="selectProjectForm">
-        <label for="projectList">Select a Project</label>
-        <select name="projectList" id="projectList"></select>
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="newProjectFormWrapper">
+        <form action="" id="newProjectForm">
+            <label for="projectName">Project Name:</label>
+            <input type="text" id="projectName" name="projectName">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="selectProjectFormWrapper">
+        <form action="" id="selectProjectForm">
+            <label for="projectList">Select a Project</label>
+            <select name="projectList" id="projectList"></select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
     <div class="nav">
         <div class="logo">
             <img src="../src/img/logo_icon.svg" alt="">

@@ -21,6 +21,7 @@ html, body {
 }
 
 .mainWrapper {
+    background-color: #bbb;
     min-height: 100%;
     position: relative;
     display: grid;
@@ -122,21 +123,55 @@ footer {
     justify-content: center;
 }
 
-#newTaskForm, #editTaskForm, #newProjectForm, #selectProjectForm {
+.newTaskFormWrapper, .editTaskFormWrapper, .newProjectFormWrapper, .selectProjectFormWrapper {
+    background-color: white;
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
     transition: opacity 0.2s ease-in;
+    
+}
+.newTaskFormWrapper, .editTaskFormWrapper {
+    height: 400px;
+    width: 250px;
+    top: calc(50% - 200px);
+    left: calc(50% - 125px);
+}
+
+.newProjectFormWrapper {
+    height: 150px;
+    width: 300px;
+    top: calc(50% - 75px);
+    left: calc(50% - 130px);
+}
+
+.selectProjectFormWrapper {
+    height: 150px;
+    width: 250px;
+    top: calc(50% - 75px);
+    left: calc(50% - 125px);
+}
+
+form {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: space-between;
+}
+
+form > * {
+    padding: 10px;
+}
+
+form > input, textarea {
+    width: 100%;
 }
 
 .priorities {

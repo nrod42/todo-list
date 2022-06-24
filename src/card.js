@@ -98,8 +98,8 @@ const createCard = (project, task) => {
   });
 
   editBtn.addEventListener('click', () => {
-    editTaskForm.style.opacity = '1';
-    editTaskForm.style.visibility = 'visible';
+    editTaskForm.parentElement.style.opacity = '1';
+    editTaskForm.parentElement.style.visibility = 'visible';
     editTaskForm.taskName.value = task.getName();
     editTaskForm.taskInfo.value = task.getInfo();
     editTaskForm.taskDueDate.value = task.getDate();
@@ -109,8 +109,8 @@ const createCard = (project, task) => {
 
   addToProjectBtn.addEventListener('click', () => {
     if (!selectProjectForm.querySelector('option')) return;
-    selectProjectForm.style.opacity = '1';
-    selectProjectForm.style.visibility = 'visible';
+    selectProjectForm.parentElement.style.opacity = '1';
+    selectProjectForm.parentElement.style.visibility = 'visible';
     selectProjectForm.setAttribute('data-id', card.getAttribute('data-id'));
   });
 
