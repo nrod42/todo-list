@@ -103,7 +103,7 @@ html, body {
 
 .newTaskBtn, .newProjectBtn {
     cursor: pointer;
-    width: calc(--icon-width * 1.2);
+    width: calc(var(--icon-width) * 1.6);
     height: auto;
     border: none;
     color: white;

@@ -92,12 +92,6 @@ const createCard = (project, task) => {
     render(project.getName(), project, project.getTasks()); //* ***Name should should not be inbox. it should be the name of the project
   });
 
-  addToProjectBtn.addEventListener('click', () => {
-    selectProjectForm.style.opacity = '1';
-    selectProjectForm.style.visibility = 'visible';
-    selectProjectForm.setAttribute('data-id', card.getAttribute('data-id'));
-  });
-
   completeBtn.addEventListener('click', () => {
     task.switchStatus();
     render(project.getName(), project, project.getTasks()); //* ***Name should should not be inbox. it should be the name of the project
@@ -111,6 +105,13 @@ const createCard = (project, task) => {
     editTaskForm.taskDueDate.value = task.getDate();
     editTaskForm.taskPriority.value = task.getPriority();
     editTaskForm.setAttribute('data-id', card.getAttribute('data-id'));
+  });
+
+  addToProjectBtn.addEventListener('click', () => {
+    if (!selectProjectForm.querySelector('option')) return;
+    selectProjectForm.style.opacity = '1';
+    selectProjectForm.style.visibility = 'visible';
+    selectProjectForm.setAttribute('data-id', card.getAttribute('data-id'));
   });
 
   return card;
