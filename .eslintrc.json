@@ -11,5 +11,7 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "prettier/prettier": "error",
+        "comma-dangle": "error"
     }
 }

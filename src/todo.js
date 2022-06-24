@@ -1,7 +1,7 @@
-import project from "./project";
+import project from './project';
 
 const todo = () => ({
-  projects: [project("Inbox")],
+  projects: [project('Inbox')],
 
   setProjects(project) {
     this.projects = project;
@@ -16,11 +16,7 @@ const todo = () => ({
   },
 
   addProject(newProject) {
-    if (
-      this.projects.find(
-        (project) => project.getName() === newProject.getName()
-      )
-    ) {
+    if (this.projects.find((project) => project.getName() === newProject.getName())) {
       return;
     }
     this.projects.push(newProject);

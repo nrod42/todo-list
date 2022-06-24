@@ -3,35 +3,35 @@ const task = (name, info, dueDate, priority) => ({
   info,
   dueDate,
   priority,
-  status: "incomplete",
+  status: 'incomplete',
   id: Math.floor(Math.random() * 100) + 1,
 
-  setName(name) {
-    this.name = name;
+  setName(newName) {
+    this.name = newName;
   },
 
   getName() {
     return this.name;
   },
 
-  setInfo(info) {
-    this.info = info;
+  setInfo(newInfo) {
+    this.info = newInfo;
   },
 
   getInfo() {
     return this.info;
   },
 
-  setDate(dueDate) {
-    this.dueDate = dueDate;
+  setDate(newDate) {
+    this.dueDate = newDate;
   },
 
   getDate() {
     return this.dueDate;
   },
 
-  setPriority(priority) {
-    this.priority = priority;
+  setPriority(newPriority) {
+    this.priority = newPriority;
   },
 
   getPriority() {
@@ -47,9 +47,7 @@ const task = (name, info, dueDate, priority) => ({
   },
 
   switchStatus() {
-    this.status === "incomplete"
-      ? (this.status = "complete")
-      : (this.status = "incomplete");
+    this.status === 'incomplete' ? (this.status = 'complete') : (this.status = 'incomplete');
   },
 });
 

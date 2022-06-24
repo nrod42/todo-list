@@ -1,171 +1,145 @@
-import todo from "./todo";
-import project from "./project";
-import task from "./task";
-import { projectBtn, render } from "./render";
-import formatCurrentDate from "./formatCurrentDate";
-import "./styles.css";
+import todo from './todo';
+import project from './project';
+import task from './task';
+import { projectBtn, render } from './render';
+import formatCurrentDate from './formatCurrentDate';
+import './styles.css';
 
-const newTaskForm = document.getElementById("newTaskForm");
-const newTaskBtn = document.querySelector(".newTaskBtn");
-const newProjectForm = document.getElementById("newProjectForm");
-const newProjectBtn = document.querySelector(".newProjectBtn");
-const editTaskForm = document.getElementById("editTaskForm");
-const selectProjectForm = document.getElementById("selectProjectForm");
-const inboxBtn = document.querySelector(".inboxBtn");
-const todayBtn = document.querySelector(".todayBtn");
-const upcomingBtn = document.querySelector(".upcomingBtn");
-const completedBtn = document.querySelector(".completedBtn");
-const sidebarProjectBtns = document.querySelector(".sidebarProjectBtns");
-const currentProject = document.querySelector(".currentProject");
+const newTaskForm = document.getElementById('newTaskForm');
+const newTaskBtn = document.querySelector('.newTaskBtn');
+const newProjectForm = document.getElementById('newProjectForm');
+const newProjectBtn = document.querySelector('.newProjectBtn');
+const editTaskForm = document.getElementById('editTaskForm');
+const selectProjectForm = document.getElementById('selectProjectForm');
+const inboxBtn = document.querySelector('.inboxBtn');
+const todayBtn = document.querySelector('.todayBtn');
+const upcomingBtn = document.querySelector('.upcomingBtn');
+const completedBtn = document.querySelector('.completedBtn');
+const sidebarProjectBtns = document.querySelector('.sidebarProjectBtns');
+const currentProject = document.querySelector('.currentProject');
 
 const todoList = todo();
 
 // Creates Default Task to display
 todoList
-  .getProject("Inbox")
-  .addTask(
-    task("First Task", "This is my first task!", formatCurrentDate(), "High")
-  );
-render(
-  "Inbox",
-  todoList.getProject("Inbox"),
-  todoList.getProject("Inbox").getTasks()
-);
+  .getProject('Inbox')
+  .addTask(task('First Task', 'This is my first task!', formatCurrentDate(), 'High'));
+render('Inbox', todoList.getProject('Inbox'), todoList.getProject('Inbox').getTasks());
 
-newTaskBtn.addEventListener("click", () => {
-  newTaskForm.style.opacity = "1";
-  newTaskForm.style.visibility = "visible";
+newTaskBtn.addEventListener('click', () => {
+  newTaskForm.style.opacity = '1';
+  newTaskForm.style.visibility = 'visible';
 });
 
-newTaskForm.addEventListener("submit", (e) => {
+newTaskForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const newTask = task(
     newTaskForm.taskName.value,
     newTaskForm.taskInfo.value,
     newTaskForm.taskDueDate.value,
-    newTaskForm.taskPriority.value
+    newTaskForm.taskPriority.value,
   );
 
-  todoList.getProject("Inbox").addTask(newTask);
-  render(
-    "Inbox",
-    todoList.getProject("Inbox"),
-    todoList.getProject("Inbox").getTasks()
-  );
+  todoList.getProject('Inbox').addTask(newTask);
+  render('Inbox', todoList.getProject('Inbox'), todoList.getProject('Inbox').getTasks());
 
-  newTaskForm.style.opacity = "0";
-  newTaskForm.style.visibility = "hidden";
+  newTaskForm.style.opacity = '0';
+  newTaskForm.style.visibility = 'hidden';
   newTaskForm.reset();
 });
 
-newProjectBtn.addEventListener("click", () => {
-  newProjectForm.style.opacity = "1";
-  newProjectForm.style.visibility = "visible";
+newProjectBtn.addEventListener('click', () => {
+  newProjectForm.style.opacity = '1';
+  newProjectForm.style.visibility = 'visible';
 });
 
-newProjectForm.addEventListener("submit", (e) => {
+newProjectForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const name = newProjectForm.projectName.value;
   const newProject = project(name);
   todoList.addProject(newProject);
   const newProjectBtn = projectBtn(newProject);
-  newProjectBtn.addEventListener("click", () => {
-    render(
-      name,
-      todoList.getProject(name),
-      todoList.getProject(name).getTasks()
-    );
+  newProjectBtn.addEventListener('click', () => {
+    render(name, todoList.getProject(name), todoList.getProject(name).getTasks());
   });
 
   // Adds new projects to the add to project form
-  const projectOption = document.createElement("option");
+  const projectOption = document.createElement('option');
   projectOption.textContent = name;
-  selectProjectForm.querySelector("select").appendChild(projectOption);
+  selectProjectForm.querySelector('select').appendChild(projectOption);
 
   sidebarProjectBtns.appendChild(newProjectBtn);
 
   newProjectForm.reset();
-  newProjectForm.style.opacity = "0";
-  newProjectForm.style.visibility = "hidden";
+  newProjectForm.style.opacity = '0';
+  newProjectForm.style.visibility = 'hidden';
 });
 
-inboxBtn.addEventListener("click", () =>
-  render(
-    "Inbox",
-    todoList.getProject("Inbox"),
-    todoList.getProject("Inbox").getTasks()
-  )
+inboxBtn.addEventListener('click', () =>
+  render('Inbox', todoList.getProject('Inbox'), todoList.getProject('Inbox').getTasks()),
 );
-todayBtn.addEventListener("click", () =>
+todayBtn.addEventListener('click', () =>
   render(
     "Today's Tasks",
-    todoList.getProject("Inbox"),
-    todoList.getProject("Inbox").getTodayTasks()
-  )
+    todoList.getProject('Inbox'),
+    todoList.getProject('Inbox').getTodayTasks(),
+  ),
 );
-upcomingBtn.addEventListener("click", () =>
+upcomingBtn.addEventListener('click', () =>
   render(
     "This Week's Tasks",
-    todoList.getProject("Inbox"),
-    todoList.getProject("Inbox").getUpcomingTasks()
-  )
+    todoList.getProject('Inbox'),
+    todoList.getProject('Inbox').getUpcomingTasks(),
+  ),
 );
-completedBtn.addEventListener("click", () => {
+completedBtn.addEventListener('click', () => {
   render(
-    "Completed",
-    todoList.getProject("Inbox"),
-    todoList.getProject("Inbox").getCompletedTasks()
+    'Completed',
+    todoList.getProject('Inbox'),
+    todoList.getProject('Inbox').getCompletedTasks(),
   );
-  const completeBtn = document.querySelector(".currentProject button");
-  // if (completeBtn) completeBtn.textContent = 'Mark As Incomplete'
-  const allBtns = Array.from(
-    document.querySelectorAll(".currentProject img:not(:first-child)")
-  );
+  // const completeBtn = document.querySelector('.currentProject button');
+  // // if (completeBtn) completeBtn.textContent = 'Mark As Incomplete'
+  const allBtns = Array.from(document.querySelectorAll('.currentProject img:not(:first-child)'));
   allBtns.forEach((btn) => btn.remove());
 });
 
-editTaskForm.addEventListener("submit", (e) => {
+editTaskForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const activeProject = todoList
     .getProjects()
-    .find(
-      (project) => project.getId() == currentProject.getAttribute("data-id")
-    );
-  const editTaskFormId = editTaskForm.getAttribute("data-id");
+    .find((project) => project.getId() === parseInt(currentProject.getAttribute('data-id'), 10));
+  const editTaskFormId = editTaskForm.getAttribute('data-id');
 
   const editedTask = activeProject
     .getTasks()
-    .find((task) => task.getId() == editTaskFormId);
+    .find((task) => task.getId() === parseInt(editTaskFormId, 10));
 
   editedTask.setName(editTaskForm.taskName.value);
   editedTask.setInfo(editTaskForm.taskInfo.value);
   editedTask.setDate(editTaskForm.taskDueDate.value);
   editedTask.setPriority(editTaskForm.taskPriority.value);
 
-  editTaskForm.style.opacity = "0";
-  editTaskForm.style.visibility = "hidden";
+  editTaskForm.style.opacity = '0';
+  editTaskForm.style.visibility = 'hidden';
   render(activeProject.getName(), activeProject, activeProject.getTasks());
 });
 
-selectProjectForm.addEventListener("submit", (e) => {
+selectProjectForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const activeProject = todoList
     .getProjects()
-    .find(
-      (project) => project.getId() == currentProject.getAttribute("data-id")
-    );
-  const selectProjectFormId = selectProjectForm.getAttribute("data-id");
+    .find((project) => project.getId() === parseInt(currentProject.getAttribute('data-id'), 10));
+  const selectProjectFormId = selectProjectForm.getAttribute('data-id');
   const selectedTask = activeProject
     .getTasks()
-    .find((task) => task.getId() == selectProjectFormId);
+    .find((task) => task.getId() === parseInt(selectProjectFormId, 10));
 
-  todoList
-    .getProject(selectProjectForm.projectList.value)
-    .addTask(selectedTask);
+  todoList.getProject(selectProjectForm.projectList.value).addTask(selectedTask);
 
   todoList.getProject(activeProject.getName()).delTask(selectedTask.getName());
 
-  selectProjectForm.style.opacity = "0";
-  selectProjectForm.style.visibility = "hidden";
+  selectProjectForm.style.opacity = '0';
+  selectProjectForm.style.visibility = 'hidden';
   render(activeProject.getName(), activeProject, activeProject.getTasks());
 });

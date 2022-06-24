@@ -1,8 +1,8 @@
-import createCard from "./card";
+import createCard from './card';
 
 const projectBtn = (newProject) => {
-  const newProjectBtn = document.createElement("button");
-  newProjectBtn.classList.add("projectBtn");
+  const newProjectBtn = document.createElement('button');
+  newProjectBtn.classList.add('projectBtn');
   newProjectBtn.textContent = newProject.getName();
 
   return newProjectBtn;
@@ -10,8 +10,8 @@ const projectBtn = (newProject) => {
 
 // Generates tab page
 const render = (name, project, tasks) => {
-  const currentProject = document.querySelector(".currentProject");
-  currentProject.setAttribute("data-id", project.getId());
+  const currentProject = document.querySelector('.currentProject');
+  currentProject.setAttribute('data-id', project.getId());
   while (currentProject.firstChild) {
     currentProject.firstChild.remove();
   }
@@ -22,7 +22,7 @@ const render = (name, project, tasks) => {
   // If we're on todays tasks screen and we add a new task thats due today,
   // it should refresh immidiately
 
-  const heading = document.createElement("h1");
+  const heading = document.createElement('h1');
   heading.textContent = name;
   currentProject.appendChild(heading);
 

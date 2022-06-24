@@ -1,12 +1,12 @@
-import formatCurrentDate from "./formatCurrentDate";
+import formatCurrentDate from './formatCurrentDate';
 
 const project = (name) => ({
   name,
   id: Math.floor(Math.random() * 200) + 1,
   tasks: [],
 
-  setName(name) {
-    this.name = name;
+  setName(newName) {
+    this.name = newName;
   },
 
   getName() {
@@ -17,14 +17,12 @@ const project = (name) => ({
     return this.id;
   },
 
-  setTasks(tasks) {
-    this.tasks = tasks;
+  setTasks(newTasks) {
+    this.tasks = newTasks;
   },
 
   getTasks() {
-    const incompletedTasks = this.tasks.filter(
-      (task) => task.getStatus() === "incomplete"
-    );
+    const incompletedTasks = this.tasks.filter((task) => task.getStatus() === 'incomplete');
     return incompletedTasks;
   },
 
@@ -43,23 +41,17 @@ const project = (name) => ({
 
   getTodayTasks() {
     const currentDate = formatCurrentDate();
-    const incompletedTasks = this.tasks.filter(
-      (task) => task.getStatus() === "incomplete"
-    );
+    const incompletedTasks = this.tasks.filter((task) => task.getStatus() === 'incomplete');
     return incompletedTasks.filter((task) => task.getDate() === currentDate);
   },
 
   getUpcomingTasks() {
-    const incompletedTasks = this.tasks.filter(
-      (task) => task.getStatus() === "incomplete"
-    );
-    return incompletedTasks.sort(
-      (a, b) => new Date(a.getDate()) - new Date(b.getDate())
-    );
+    const incompletedTasks = this.tasks.filter((task) => task.getStatus() === 'incomplete');
+    return incompletedTasks.sort((a, b) => new Date(a.getDate()) - new Date(b.getDate()));
   },
 
   getCompletedTasks() {
-    return this.tasks.filter((task) => task.getStatus() !== "incomplete");
+    return this.tasks.filter((task) => task.getStatus() !== 'incomplete');
   },
 });
 
