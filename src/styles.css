@@ -29,6 +29,16 @@ html, body {
     grid-template-rows: auto 1fr auto;
 }
 
+button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    filter: brightness(85%);
+}
+
 .nav {
     margin: 5px;
     grid-column: span 2;
@@ -81,16 +91,6 @@ html, body {
     margin: 10px;
 }
 
-.sidebarBtns button, .sidebarProjectBtns button {
-    padding: 10px;
-    cursor: pointer;
-    border: none;
-}
-
-.sidebarBtns button:hover, .sidebarProjectBtns button:hover {
-    filter: brightness(85%);
-}
-
 .sidebarTaskTitle, .sidebarProjectTitle {
     display: flex;
     flex-wrap: wrap;
@@ -124,7 +124,8 @@ footer {
 }
 
 .newTaskFormWrapper, .editTaskFormWrapper, .newProjectFormWrapper, .selectProjectFormWrapper {
-    background-color: white;
+    background-color: wheat;
+    border-radius: 10px;
     position: absolute;
     opacity: 0;
     visibility: hidden;
@@ -133,10 +134,10 @@ footer {
     
 }
 .newTaskFormWrapper, .editTaskFormWrapper {
-    height: 400px;
-    width: 250px;
-    top: calc(50% - 200px);
-    left: calc(50% - 125px);
+    height: 500px;
+    width: 300px;
+    top: calc(50% - 250px);
+    left: calc(50% - 150px);
 }
 
 .newProjectFormWrapper {
@@ -157,7 +158,7 @@ form {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 1px solid black;
+    border: none;
     border-radius: 5px;
     padding: 10px;
     display: flex;
@@ -172,11 +173,17 @@ form > * {
 
 form > input, textarea {
     width: 100%;
+    border: none;
+}
+
+form > label {
+    font-weight: bold;
 }
 
 .priorities {
     display: flex;
     flex-direction: column;
+    padding-top: 0;
 }
 
 .cardBtn {
