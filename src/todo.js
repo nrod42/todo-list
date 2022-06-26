@@ -21,6 +21,10 @@ const todo = () => ({
     }
     this.projects.push(newProject);
   },
+
+  delProject(projectName) {
+    this.projects = this.projects.filter((project) => project.getName() !== projectName);
+  },
 });
 
 export default todo;

@@ -5,7 +5,6 @@ import { projectBtn, render } from './render';
 import formatCurrentDate from './formatCurrentDate';
 import './styles.css';
 
-
 const newTaskForm = document.getElementById('newTaskForm');
 const newTaskBtn = document.querySelector('.newTaskBtn');
 const newProjectForm = document.getElementById('newProjectForm');
@@ -61,17 +60,36 @@ newProjectForm.addEventListener('submit', (e) => {
   const name = newProjectForm.projectName.value;
   const newProject = project(name);
   todoList.addProject(newProject);
-  const newProjectBtn = projectBtn(newProject);
+
+  const newProjectTab = document.createElement('div');
+
+  const newProjectBtn = document.createElement('button');
+  newProjectBtn.classList.add('projectBtn');
+  newProjectBtn.textContent = newProject.getName();
+
   newProjectBtn.addEventListener('click', () => {
     render(name, todoList.getProject(name), todoList.getProject(name).getTasks());
   });
+
+  const delProjectBtn = document.createElement('button');
+  delProjectBtn.classList.add('delProjectBtn');
+  delProjectBtn.textContent = 'del';
+
+  delProjectBtn.addEventListener('click', () => {
+    todoList.delProject(newProject);
+    newProjectTab.remove();
+    projectOption.remove();
+  });
+
+  newProjectTab.appendChild(newProjectBtn);
+  newProjectTab.appendChild(delProjectBtn);
 
   // Adds new projects to the add to project form
   const projectOption = document.createElement('option');
   projectOption.textContent = name;
   selectProjectForm.querySelector('select').appendChild(projectOption);
 
-  sidebarProjectBtns.appendChild(newProjectBtn);
+  sidebarProjectBtns.appendChild(newProjectTab);
 
   newProjectForm.reset();
   newProjectForm.parentElement.style.opacity = '0';
@@ -120,13 +138,14 @@ selectProjectForm.addEventListener('submit', (e) => {
 
 // 'Closes' all forms when Escape key is pressed
 document.addEventListener('keydown', (e) => {
-  if (e.code === 'Escape') {//Add a close button later
+  if (e.code === 'Escape') {
+    // Add a close button later
     const allForms = Array.from(document.querySelectorAll('form'));
     allForms.forEach((form) => {
       form.parentElement.style.opacity = '0';
       form.parentElement.style.visibility = 'hidden';
     });
-  } 
+  }
 });
 
 // ***** Show Each Main Project Tab *****

@@ -40,9 +40,8 @@ const project = (name) => ({
   },
 
   getTodayTasks() {
-    const currentDate = formatCurrentDate();
     const incompletedTasks = this.tasks.filter((task) => task.getStatus() === 'incomplete');
-    return incompletedTasks.filter((task) => task.getDate() === currentDate);
+    return incompletedTasks.filter((task) => task.getDate() === formatCurrentDate());
   },
 
   getUpcomingTasks() {
