@@ -5,6 +5,8 @@ import { projectBtn, render } from './render';
 import formatCurrentDate from './formatCurrentDate';
 import './styles.css';
 
+const allForms = Array.from(document.querySelectorAll('form'));
+const allCloseBtns = Array.from(document.querySelectorAll('.closeBtn'));
 const newTaskForm = document.getElementById('newTaskForm');
 const newTaskBtn = document.querySelector('.newTaskBtn');
 const newProjectForm = document.getElementById('newProjectForm');
@@ -140,12 +142,18 @@ selectProjectForm.addEventListener('submit', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Escape') {
     // Add a close button later
-    const allForms = Array.from(document.querySelectorAll('form'));
     allForms.forEach((form) => {
       form.parentElement.style.opacity = '0';
       form.parentElement.style.visibility = 'hidden';
     });
   }
+});
+
+allCloseBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    e.target.parentElement.parentElement.style.opacity = '0';
+    e.target.parentElement.parentElement.style.visibility = 'hidden';
+  });
 });
 
 // ***** Show Each Main Project Tab *****

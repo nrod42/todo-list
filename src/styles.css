@@ -167,6 +167,12 @@ form {
     justify-content: space-between;
 }
 
+.closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 form > * {
     padding: 10px;
 }
