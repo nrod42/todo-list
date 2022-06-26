@@ -1,4 +1,4 @@
-import { render } from './render';
+import render from './render';
 import completeIcon from './img/completed_icon.svg';
 import editIcon from './img/edit_icon.svg';
 import delIcon from './img/delete_icon.svg';

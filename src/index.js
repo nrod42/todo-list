@@ -1,8 +1,9 @@
 import todo from './todo';
 import project from './project';
 import task from './task';
-import { projectBtn, render } from './render';
+import render from './render';
 import formatCurrentDate from './formatCurrentDate';
+import delIcon from './img/delete_icon.svg';
 import './styles.css';
 
 const allForms = Array.from(document.querySelectorAll('form'));
@@ -64,7 +65,9 @@ newProjectForm.addEventListener('submit', (e) => {
   todoList.addProject(newProject);
 
   const newProjectTab = document.createElement('div');
+  newProjectTab.classList.add('newProjectTab');
 
+  // Creates button for each project. Displays project when clicked
   const newProjectBtn = document.createElement('button');
   newProjectBtn.classList.add('projectBtn');
   newProjectBtn.textContent = newProject.getName();
@@ -73,9 +76,10 @@ newProjectForm.addEventListener('submit', (e) => {
     render(name, todoList.getProject(name), todoList.getProject(name).getTasks());
   });
 
-  const delProjectBtn = document.createElement('button');
-  delProjectBtn.classList.add('delProjectBtn');
-  delProjectBtn.textContent = 'del';
+  // Creates delete project button
+  const delProjectBtn = new Image();
+  delProjectBtn.src = delIcon;
+  delProjectBtn.classList.add('actionBtn');
 
   delProjectBtn.addEventListener('click', () => {
     todoList.delProject(newProject);
@@ -86,7 +90,7 @@ newProjectForm.addEventListener('submit', (e) => {
   newProjectTab.appendChild(newProjectBtn);
   newProjectTab.appendChild(delProjectBtn);
 
-  // Adds new projects to the add to project form
+  // Adds new projects to the 'add to project' form
   const projectOption = document.createElement('option');
   projectOption.textContent = name;
   selectProjectForm.querySelector('select').appendChild(projectOption);
@@ -149,6 +153,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// Closes form when x is clicked
 allCloseBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
     e.target.parentElement.parentElement.style.opacity = '0';

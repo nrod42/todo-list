@@ -85,13 +85,8 @@ button:hover {
     flex-direction: column;
 }
 
-.sidebarBtns, .sidebarProjectBtns{
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-}
-
 .sidebarTaskTitle, .sidebarProjectTitle {
+    margin: 10px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -99,15 +94,29 @@ button:hover {
 }
 
 .sidebar h3 {
-    padding-left: 10px;
+    padding: 5px;
+}
+
+.sidebarBtns, .sidebarProjectBtns{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.newProjectTab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.projectBtn {
+    width: 100%;
 }
 
 .newTaskBtn, .newProjectBtn {
     cursor: pointer;
     width: calc(var(--icon-width) * 1.6);
     height: auto;
-    border: none;
-    color: white;
     padding: 5px;
 }
 
@@ -124,13 +133,14 @@ footer {
 }
 
 .newTaskFormWrapper, .editTaskFormWrapper, .newProjectFormWrapper, .selectProjectFormWrapper {
-    background-color: wheat;
+    background-color: gainsboro;
     border-radius: 10px;
     position: absolute;
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
     transition: opacity 0.2s ease-in;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     
 }
 .newTaskFormWrapper, .editTaskFormWrapper {
@@ -168,9 +178,16 @@ form {
 }
 
 .closeBtn {
+    display: flex;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
+    height: var(--icon-width);
+    height: var(--icon-width);
+    border-radius: 50%;
+    align-items: center;
+    background-color: crimson;
+    color: white;
 }
 
 form > * {
@@ -180,6 +197,7 @@ form > * {
 form > input, textarea {
     width: 100%;
     border: none;
+    border-radius: 10px;
 }
 
 form > label {
@@ -265,6 +283,10 @@ form > label {
     cursor: pointer;
     margin: 0 5px;
     transition: transform 0.2s ease;
+}
+
+.actionBtn:hover {
+    transform: scaleX(1.2) scaleY(1.2);
 }
 
 .actionBtn:active {

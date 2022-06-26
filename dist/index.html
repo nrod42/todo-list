@@ -11,11 +11,11 @@
     <div class="mainWrapper">
     <div class="newTaskFormWrapper">
         <form action="" id="newTaskForm">
-            <button class="closeBtn" type="button">x</button>
+            <button class="closeBtn" type="button">X</button>
             <label for="taskName">Task Title:</label>
-            <input type="text" id="taskName" name="taskName">
+            <input type="text" id="taskName" name="taskName" placeholder="Enter task name" required>
             <label for="taskInfo">Description:</label>
-            <textarea id="taskInfo" name="taskInfo"></textarea>
+            <textarea id="taskInfo" name="taskInfo" placeholder="Enter task notes"></textarea>
             <label for="taskDueDate">Due Date (Optional):</label>
             <input type="date" id="taskDueDate" name="taskDueDate">
             <label for="taskPriority">Priority:</label>
@@ -42,9 +42,9 @@
     </div>
     <div class="editTaskFormWrapper">
         <form action="" id="editTaskForm">
-            <button class="closeBtn" type="button">x</button>
+            <button class="closeBtn" type="button">X</button>
             <label for="taskName">Task Title:</label>
-            <input type="text" id="taskName" name="taskName">
+            <input type="text" id="taskName" name="taskName" required>
             <label for="taskInfo">Description:</label>
             <textarea id="taskInfo" name="taskInfo"></textarea>
             <label for="taskDueDate">Due Date (Optional):</label>
@@ -73,15 +73,15 @@
     </div>
     <div class="newProjectFormWrapper">
         <form action="" id="newProjectForm">
-            <button class="closeBtn" type="button">x</button>
+            <button class="closeBtn" type="button">X</button>
             <label for="projectName">Project Name:</label>
-            <input type="text" id="projectName" name="projectName">
+            <input type="text" id="projectName" name="projectName" placeholder="Enter project name" required>
             <button type="submit">Submit</button>
         </form>
     </div>
     <div class="selectProjectFormWrapper">
         <form action="" id="selectProjectForm">
-            <button class="closeBtn" type="button">x</button>
+            <button class="closeBtn" type="button">X</button>
             <label for="projectList">Select a Project</label>
             <select name="projectList" id="projectList"></select>
             <button type="submit">Submit</button>
@@ -89,7 +89,7 @@
     </div>
     <div class="nav">
         <div class="logo">
-            <img src="../src/img/logo_icon.svg" alt="">
+            <a href='.'><img src="../src/img/logo_icon.svg" alt=""></a>
             <p>Get'er Done</p>
         </div>
         <div class="profile">

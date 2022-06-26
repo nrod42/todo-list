@@ -1,13 +1,5 @@
 import createCard from './card';
 
-const projectBtn = (newProject) => {
-  const newProjectBtn = document.createElement('button');
-  newProjectBtn.classList.add('projectBtn');
-  newProjectBtn.textContent = newProject.getName();
-
-  return newProjectBtn;
-};
-
 // Generates tab page
 const render = (name, project, tasks) => {
   const currentProject = document.querySelector('.currentProject');
@@ -25,4 +17,4 @@ const render = (name, project, tasks) => {
   });
 };
 
-export { projectBtn, render };
+export default render;
