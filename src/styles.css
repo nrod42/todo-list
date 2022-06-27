@@ -33,6 +33,7 @@ button {
     padding: 10px;
     cursor: pointer;
     border: none;
+    font-size: 16px;
 }
 
 button:hover {
@@ -125,12 +126,6 @@ button:hover {
     padding: 10px;
 }
 
-footer {
-    grid-column: span 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .newTaskFormWrapper, .editTaskFormWrapper, .newProjectFormWrapper, .selectProjectFormWrapper {
     background-color: gainsboro;
@@ -202,6 +197,7 @@ form > input, textarea {
     width: 100%;
     border: none;
     border-radius: 10px;
+    resize:vertical;
 }
 
 form > label {
@@ -222,7 +218,6 @@ form > label {
     border: none;
     text-align: left;
     outline: none;
-    font-size: 20px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -237,12 +232,11 @@ form > label {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    
+    align-items: center; 
 }
 
-.cardBtnContent h3 {
-    padding-right: 10px;
+.cardBtnContent h2 {
+    padding-right: 15px;
 }
 
 .cardBtnContent p {
@@ -317,5 +311,9 @@ form > label {
 }
 
 footer {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
 }

@@ -1,9 +1,10 @@
-const formatCurrentDate = () => {
-  const currentDate = new Date();
-  const dd = String(currentDate.getDate()).padStart(2, '0');
-  const mm = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const yyyy = currentDate.getFullYear();
-  return `${yyyy}-${mm}-${dd}`;
+const formatDate = (date) => {
+  if (date === '') return;
+  const splitDate = date.split('-');
+  const dd = splitDate[2];
+  const mm = splitDate[1];
+  const yyyy = splitDate[0];
+  return `${mm}/${dd}/${yyyy}`;
 };
 
-export default formatCurrentDate;
+export default formatDate;

@@ -10,7 +10,7 @@ const createCard = (project, task) => {
   const cardBtnContent = document.createElement('div');
   const cardActionBtns = document.createElement('div');
   const cardContent = document.createElement('div');
-  const taskName = document.createElement('h3');
+  const taskName = document.createElement('h2');
   const taskInfo = document.createElement('p');
   const taskDueDate = document.createElement('p');
   const editTaskForm = document.getElementById('editTaskForm');

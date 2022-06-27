@@ -1,4 +1,5 @@
-import formatCurrentDate from './formatCurrentDate';
+import { format, compareAsc } from 'date-fns';
+import formatDate from './formatCurrentDate';
 
 const project = (name) => ({
   name,
@@ -41,12 +42,15 @@ const project = (name) => ({
 
   getTodayTasks() {
     const incompletedTasks = this.tasks.filter((task) => task.getStatus() === 'incomplete');
-    return incompletedTasks.filter((task) => task.getDate() === formatCurrentDate());
+    return incompletedTasks.filter((task) => task.getDate() === format(new Date(), 'MM/dd/yyyy'));
   },
 
   getUpcomingTasks() {
     const incompletedTasks = this.tasks.filter((task) => task.getStatus() === 'incomplete');
-    return incompletedTasks.sort((a, b) => new Date(a.getDate()) - new Date(b.getDate()));
+    const upcomingTasks = incompletedTasks.filter(
+      (task) => task.getDate() >= format(new Date(), 'MM/dd/yyyy'),
+    );
+    return upcomingTasks.sort((a, b) => new Date(a.getDate()) - new Date(b.getDate()));
   },
 
   getCompletedTasks() {

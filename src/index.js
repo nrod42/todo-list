@@ -1,8 +1,9 @@
+import { format, compareAsc } from 'date-fns';
+import formatDate from './formatCurrentDate';
 import todo from './todo';
 import project from './project';
 import task from './task';
 import render from './render';
-import formatCurrentDate from './formatCurrentDate';
 import delIcon from './img/delete_icon.svg';
 import './styles.css';
 
@@ -26,7 +27,7 @@ const todoList = todo();
 // Creates Default Task to display
 todoList
   .getProject('Inbox')
-  .addTask(task('First Task', 'This is my first task!', formatCurrentDate(), 'High'));
+  .addTask(task('First Task', 'This is my first task!', format(new Date(), 'MM/dd/yyyy'), 'High'));
 render('Inbox', todoList.getProject('Inbox'), todoList.getProject('Inbox').getTasks());
 
 // ***** Form 'Submit' Event Listeners *****
@@ -41,7 +42,7 @@ newTaskForm.addEventListener('submit', (e) => {
   const newTask = task(
     newTaskForm.taskName.value,
     newTaskForm.taskInfo.value,
-    newTaskForm.taskDueDate.value,
+    formatDate(newTaskForm.taskDueDate.value),
     newTaskForm.taskPriority.value,
   );
   todoList.getProject('Inbox').addTask(newTask);
@@ -115,7 +116,7 @@ editTaskForm.addEventListener('submit', (e) => {
 
   editedTask.setName(editTaskForm.taskName.value);
   editedTask.setInfo(editTaskForm.taskInfo.value);
-  editedTask.setDate(editTaskForm.taskDueDate.value);
+  editedTask.setDate(formatDate(editTaskForm.taskDueDate.value));
   editedTask.setPriority(editTaskForm.taskPriority.value);
 
   editTaskForm.parentElement.style.opacity = '0';
