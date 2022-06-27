@@ -21,7 +21,7 @@ html, body {
 }
 
 .mainWrapper {
-    background-color: #bbb;
+    background-color: gray;
     min-height: 100%;
     position: relative;
     display: grid;
@@ -141,8 +141,9 @@ footer {
     overflow: hidden;
     transition: opacity 0.2s ease-in;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    
+    z-index: 1;
 }
+
 .newTaskFormWrapper, .editTaskFormWrapper {
     height: 500px;
     width: 300px;
@@ -164,6 +165,21 @@ footer {
     left: calc(50% - 125px);
 }
 
+.closeBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: var(--icon-width);
+    height: var(--icon-width);
+    border-radius: 50%;
+    background-color: crimson;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
 form {
     position: absolute;
     width: 100%;
@@ -175,19 +191,7 @@ form {
     flex-direction: column;
     align-items: center; 
     justify-content: space-between;
-}
-
-.closeBtn {
-    display: flex;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    height: var(--icon-width);
-    height: var(--icon-width);
-    border-radius: 50%;
-    align-items: center;
-    background-color: crimson;
-    color: white;
+    
 }
 
 form > * {
@@ -299,14 +303,19 @@ form > label {
 }
 
 .mediumPriority {
-    background-color: gold;
+    background-color: orange;
+    color: black;
 }
 
 .lowPriority {
-    background-color: darkblue;
-    color: white;
+    background-color: gold;
+    color: black;
 }
 
 .nonePriority {
     background-color: #bbb;
+}
+
+footer {
+    color: white;
 }
