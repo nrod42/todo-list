@@ -11,7 +11,7 @@
 }
 
 :root {
-    --icon-width: 30px;
+    --icon-width: 1.8rem;
 }
 
 html, body {
@@ -49,18 +49,15 @@ button:hover {
     justify-content: space-between;
 }
 
-.nav ul {
-    list-style-type: none;
+.logo {
     display: flex;
     align-items: center;
 }
 
-.nav li {
-    display: inline;
-}
-
-.logo {
+.profileOptions {
+    list-style-type: none;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -77,7 +74,7 @@ button:hover {
 }
 
 .profileIcon {
-    width: 45px;
+    width: calc(var(--icon-width) + 15px);
 }
 
 .sidebar {
@@ -123,9 +120,18 @@ button:hover {
 
 .currentProject {
     background-color: whitesmoke;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
+.currentProject > * {
+    margin: 0 5%;
+}
+
+.currentProject > h1 {
+    margin: 10px 5%;
+}
 
 .newTaskFormWrapper, .editTaskFormWrapper, .newProjectFormWrapper, .selectProjectFormWrapper {
     background-color: gainsboro;
