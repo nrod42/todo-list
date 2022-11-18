@@ -47,7 +47,7 @@ const task = (name, info, dueDate, priority) => ({
   },
 
   switchStatus() {
-    this.status === 'incomplete' ? (this.status = 'complete') : (this.status = 'incomplete');
+    this.status = this.status === 'incomplete' ? 'complete' : 'incomplete';
   },
 });
 

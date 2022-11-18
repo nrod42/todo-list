@@ -69,7 +69,7 @@ newProjectForm.addEventListener('submit', (e) => {
   newProjectTab.classList.add('newProjectTab');
 
   // Creates button for each project. Displays project when clicked
-  const newProjectBtn = document.createElement('button');
+  // const newProjectBtn = document.createElement('button');
   newProjectBtn.classList.add('projectBtn');
   newProjectBtn.textContent = newProject.getName();
 
@@ -187,8 +187,6 @@ completedBtn.addEventListener('click', () => {
     allCompletedTasks = allCompletedTasks.concat(project.getCompletedTasks());
   });
   render('Completed', todoList.getProject('Inbox'), allCompletedTasks);
-  // const completeBtn = document.querySelector('.currentProject button');
-  // // if (completeBtn) completeBtn.textContent = 'Mark As Incomplete'
   const allBtns = Array.from(document.querySelectorAll('.currentProject img:not(:first-child)'));
   allBtns.forEach((btn) => btn.remove());
 });

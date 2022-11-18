@@ -1,5 +1,5 @@
 import { format, compareAsc } from 'date-fns';
-import formatDate from './formatCurrentDate';
+// import formatDate from './formatCurrentDate';
 
 const project = (name) => ({
   name,
